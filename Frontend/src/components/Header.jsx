@@ -9,27 +9,35 @@ import { FaTwitterSquare } from "react-icons/fa";
 import { FaInstagramSquare } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { FaTelegramPlane } from "react-icons/fa";
+import { IoChevronDownOutline } from "react-icons/io5";
+import { HiOutlineMenuAlt1 } from "react-icons/hi";
 
 const Header = () => {
     const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [openMobileDropdown, setOpenMobileDropdown] = useState(null);
+
+    const toggleMobileDropdown = (menu) => {
+        setOpenMobileDropdown(openMobileDropdown === menu ? null : menu);
+    };
 
     return (
         <>
             <header>
 
                 {/* Top header */}
-                <div className='flex justify-between items-start px-8 lg:px-30 py-3 lg:py-5 bg-[#233845] text-white'>
-                    <div className='flex flex-wrap font-normal text-zinc-300 gap-x-4 gap-y-1 max-w-[65%] lg:max-w-none lg:items-center'>
-                        <div className='flex items-center gap-7'>
+                <div className='flex flex-col items-center lg:flex-row lg:justify-between lg:items-start px-8 lg:px-30 py-3 lg:py-5 bg-[#233845] text-white'>
+                    <div className='flex flex-col items-center lg:items-start lg:flex-row lg:flex-wrap font-normal text-zinc-300 gap-x-4 gap-y-1 lg:max-w-none'>
+                        <div className='flex items-center gap-4 lg:gap-7'>
                             <p><span className='text-white font-semibold'>Call Us:</span> +14 20 7836 2736</p>
-                            <div className='h-4 border-r border-zinc-500'></div>
+                            <div className='h-4 border-r border-zinc-500 hidden lg:block'></div>
                             <p><span className='text-white font-semibold'>Mail Us:</span> hello@torado.com</p>
                             <div className='h-4 border-r border-zinc-500 hidden lg:block'></div>
                         </div>
-                        <p><span className='text-white font-semibold'>Location:</span> 39th Street, Fourth Floor New York, NY 10018</p>
+                        <p><span className='text-white font-semibold'>Location:</span> 39th Street, New York, NY 10018</p>
                     </div>
-                    <div className='flex gap-4 font-light text-zinc-300 items-center justify-center shrink-0'>
+                    <div className='flex gap-4 font-light text-zinc-300 items-center justify-center shrink-0 mt-1 lg:mt-0'>
                         <div className='flex gap-2 items-center'>
                             <CiUser />
                             <p>Login</p>
@@ -43,90 +51,209 @@ const Header = () => {
                         </div>
                     </div>
                 </div>
+            </header>
 
-                {/* Main Header */}
-                <div className='flex py-3 px-8 lg:px-30 lg:py-5 bg-[#152C39] items-center justify-between'>
+            {/* Main Header - sticky */}
+            <div className='sticky top-0 z-500 flex py-3 px-8 lg:px-30 lg:py-5 bg-[#152C39] items-center justify-between'>
+                <div>
+                    <img src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/logo.svg" alt="MainLogo" />
+                </div>
+
+                {/* Desktop Navigation */}
+                <div className='hidden lg:flex items-center gap-6 lg:gap-20'>
                     <div>
-                        <img src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/logo.svg" alt="MainLogo" />
+                        <nav>
+                            <ul className='flex gap-4 lg:gap-10 font-semibold text-[15px] lg:text-xl text-zinc-300'>
+                                <li className='relative group/home hover:text-[#FB5E01] transition-all duration-300 cursor-pointer'>
+                                    Home +
+                                    {/* Dropdown Menu Home */}
+                                    <ul className='absolute top-full left-0 mt-5 w-50 bg-white shadow-lg rounded-lg py-2 opacity-0 invisible group-hover/home:opacity-100 group-hover/home:visible translate-y-2 group-hover/home:translate-y-0 transition-all duration-300 z-50'>
+                                        <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>Home One</li>
+                                        <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>Home Two</li>
+                                    </ul>
+                                </li>
+                                <li className='relative group/home hover:text-[#FB5E01] transition-all duration-300 cursor-pointer'>
+                                    Service +
+                                    {/* Dropdown Menu Service */}
+                                    <ul className='absolute top-full left-0 mt-5 w-50 bg-white shadow-lg rounded-lg py-2 opacity-0 invisible group-hover/home:opacity-100 group-hover/home:visible translate-y-2 group-hover/home:translate-y-0 transition-all duration-300 z-50'>
+                                        <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>Services</li>
+                                        <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>Service Details</li>
+                                    </ul>
+                                </li>
+                                <li className='relative group/home hover:text-[#FB5E01] transition-all duration-300 cursor-pointer'>
+                                    Projects +
+                                    {/* Dropdown Menu Projects */}
+                                    <ul className='absolute top-full left-0 mt-5 w-50 bg-white shadow-lg rounded-lg py-2 opacity-0 invisible group-hover/home:opacity-100 group-hover/home:visible translate-y-2 group-hover/home:translate-y-0 transition-all duration-300 z-50'>
+                                        <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>Projects</li>
+                                        <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>Project Details</li>
+                                    </ul>
+                                </li>
+                                <li className='relative group/home hover:text-[#FB5E01] transition-all duration-300 cursor-pointer'>
+                                    Pages +
+                                    {/* Dropdown Menu Pages */}
+                                    <ul className='absolute top-full left-0 mt-5 w-50 bg-white shadow-lg rounded-lg py-2 opacity-0 invisible group-hover/home:opacity-100 group-hover/home:visible translate-y-2 group-hover/home:translate-y-0 transition-all duration-300 z-50'>
+                                        <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>About Us</li>
+                                        <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>Team</li>
+                                        <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>Pricing Plan</li>
+                                        <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>FAQs</li>
+                                        <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>Testimonials</li>
+                                        <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>My Account</li>
+                                        <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>Privacy & Policy</li>
+                                        <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>Terms & Conditions</li>
+                                    </ul>
+                                </li>
+                                <li className='relative group/home hover:text-[#FB5E01] transition-all duration-300 cursor-pointer'>
+                                    Blog +
+                                    {/* Dropdown Menu Blog */}
+                                    <ul className='absolute top-full left-0 mt-5 w-50 bg-white shadow-lg rounded-lg py-2 opacity-0 invisible group-hover/home:opacity-100 group-hover/home:visible translate-y-2 group-hover/home:translate-y-0 transition-all duration-300 z-50'>
+                                        <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>Our Blog</li>
+                                        <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>Blog Details</li>
+                                    </ul>
+                                </li>
+                                <li className='hover:text-[#FB5E01] transition-all duration-300 cursor-pointer'>Contact Us</li>
+                            </ul>
+                        </nav>
                     </div>
-                    <div className='flex items-center gap-6 lg:gap-20'>
-                        <div>
-                            <nav>
-                                <ul className='flex gap-4 lg:gap-10 font-semibold text-[15px] lg:text-xl text-zinc-300'>
-                                    <li className='relative group/home hover:text-[#FB5E01] transition-all duration-300 cursor-pointer'>
-                                        Home +
-                                        {/* Dropdown Menu Home */}
-                                        <ul className='absolute top-full left-0 mt-5 w-50 bg-white shadow-lg rounded-lg py-2 opacity-0 invisible group-hover/home:opacity-100 group-hover/home:visible translate-y-2 group-hover/home:translate-y-0 transition-all duration-300 z-50'>
-                                            <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>Home One</li>
-                                            <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>Home Two</li>
-                                        </ul>
-                                    </li>
-                                    <li className='relative group/home hover:text-[#FB5E01] transition-all duration-300 cursor-pointer'>
-                                        Service +
-                                        {/* Dropdown Menu Service */}
-                                        <ul className='absolute top-full left-0 mt-5 w-50 bg-white shadow-lg rounded-lg py-2 opacity-0 invisible group-hover/home:opacity-100 group-hover/home:visible translate-y-2 group-hover/home:translate-y-0 transition-all duration-300 z-50'>
-                                            <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>Services</li>
-                                            <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>Service Details</li>
-                                        </ul>
-                                    </li>
-                                    <li className='relative group/home hover:text-[#FB5E01] transition-all duration-300 cursor-pointer'>
-                                        Projects +
-                                        {/* Dropdown Menu Projects */}
-                                        <ul className='absolute top-full left-0 mt-5 w-50 bg-white shadow-lg rounded-lg py-2 opacity-0 invisible group-hover/home:opacity-100 group-hover/home:visible translate-y-2 group-hover/home:translate-y-0 transition-all duration-300 z-50'>
-                                            <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>Projects</li>
-                                            <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>Project Details</li>
-                                        </ul>
-                                    </li>
-                                    <li className='relative group/home hover:text-[#FB5E01] transition-all duration-300 cursor-pointer'>
-                                        Pages +
-                                        {/* Dropdown Menu Pages */}
-                                        <ul className='absolute top-full left-0 mt-5 w-50 bg-white shadow-lg rounded-lg py-2 opacity-0 invisible group-hover/home:opacity-100 group-hover/home:visible translate-y-2 group-hover/home:translate-y-0 transition-all duration-300 z-50'>
-                                            <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>About Us</li>
-                                            <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>Team</li>
-                                            <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>Pricing Plan</li>
-                                            <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>FAQs</li>
-                                            <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>Testimonials</li>
-                                            <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>My Account</li>
-                                            <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>Privacy & Policy</li>
-                                            <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>Terms & Conditions</li>
-                                        </ul>
-                                    </li>
-                                    <li className='relative group/home hover:text-[#FB5E01] transition-all duration-300 cursor-pointer'>
-                                        Blog +
-                                        {/* Dropdown Menu Blog */}
-                                        <ul className='absolute top-full left-0 mt-5 w-50 bg-white shadow-lg rounded-lg py-2 opacity-0 invisible group-hover/home:opacity-100 group-hover/home:visible translate-y-2 group-hover/home:translate-y-0 transition-all duration-300 z-50'>
-                                            <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>Our Blog</li>
-                                            <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>Blog Details</li>
-                                        </ul>
-                                    </li>
-                                    <li className='hover:text-[#FB5E01] transition-all duration-300 cursor-pointer'>Contact Us</li>
-                                </ul>
-                            </nav>
-                        </div>
-                        <div className='flex items-center gap-5'>
-                            <PiListLight className='text-white text-2xl font-bold cursor-pointer' onClick={() => setIsOffcanvasOpen(true)} />
-                            <div className='h-4 border-r border-zinc-500'></div>
-                            <div className='relative'>
-                                <CiSearch className='text-white text-2xl font-bold cursor-pointer' onClick={() => setIsSearchOpen(!isSearchOpen)} />
-                                {/* Search Dropdown */}
-                                <div className={`absolute top-full right-0 mt-12 w-96 bg-[#152C39] shadow-2xl p-8 rounded-sm transition-all duration-300 z-50 ${isSearchOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-2'}`}>
-                                    <div className='flex items-center border-2 border-[#FB5E01] bg-white px-4 py-2.5'>
-                                        <input
-                                            type='text'
-                                            placeholder='Search...'
-                                            className='w-full outline-none text-gray-700 text-[15px] placeholder-gray-400 bg-transparent'
-                                        />
-                                        <CiSearch className='text-gray-500 text-2xl cursor-pointer' />
-                                    </div>
+                    <div className='flex items-center gap-5'>
+                        <PiListLight className='text-white text-2xl font-bold cursor-pointer' onClick={() => setIsOffcanvasOpen(true)} />
+                        <div className='h-4 border-r border-zinc-500'></div>
+                        <div className='relative'>
+                            <CiSearch className='text-white text-2xl font-bold cursor-pointer' onClick={() => setIsSearchOpen(!isSearchOpen)} />
+                            {/* Search Dropdown */}
+                            <div className={`absolute top-full right-0 mt-12 w-96 bg-[#152C39] shadow-2xl p-8 rounded-sm transition-all duration-300 z-50 ${isSearchOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-2'}`}>
+                                <div className='flex items-center border-2 border-[#FB5E01] bg-white px-4 py-2.5'>
+                                    <input
+                                        type='text'
+                                        placeholder='Search...'
+                                        className='w-full outline-none text-gray-700 text-[15px] placeholder-gray-400 bg-transparent'
+                                    />
+                                    <CiSearch className='text-gray-500 text-2xl cursor-pointer' />
                                 </div>
                             </div>
-                            <button className='text-white text-sm lg:text-lg font-semibold px-4 py-2 lg:px-6 lg:py-3 bg-[#FB5E01] hover:bg-black transition-all duration-600 cursor-pointer'>
-                                Let's Talk
-                            </button>
                         </div>
+                        <button className='text-white text-sm lg:text-lg font-semibold px-4 py-2 lg:px-6 lg:py-3 bg-[#FB5E01] hover:bg-black transition-all duration-600 cursor-pointer'>
+                            Let's Talk
+                        </button>
                     </div>
                 </div>
-            </header>
+
+                {/* Mobile Hamburger Button */}
+                <button
+                    className='lg:hidden text-white text-3xl cursor-pointer'
+                    onClick={() => setIsMobileMenuOpen(true)}
+                >
+                    <HiOutlineMenuAlt1 />
+                </button>
+            </div>
+
+            {/* Mobile Menu Overlay */}
+            <div
+                className={`fixed inset-0 bg-black/50 z-997 transition-opacity duration-300 lg:hidden ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
+                onClick={() => setIsMobileMenuOpen(false)}
+            />
+
+            {/* Mobile Menu Panel */}
+            <div className={`fixed top-0 left-0 h-full w-full max-w-[400px] bg-white z-998 shadow-2xl transition-transform duration-300 overflow-y-auto lg:hidden ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+                {/* Mobile Menu Header */}
+                <div className='flex items-center justify-between p-5 border-b border-gray-200'>
+                    <img className='h-8' src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/black-logo.svg" alt="MobileLogo" />
+                    <IoCloseOutline
+                        className='text-3xl text-gray-600 cursor-pointer hover:text-[#FB5E01] transition-colors duration-300'
+                        onClick={() => setIsMobileMenuOpen(false)}
+                    />
+                </div>
+
+                {/* Mobile Navigation */}
+                <nav className='p-5'>
+                    <ul className='flex flex-col'>
+                        {/* Home */}
+                        <li className='border-b border-gray-200'>
+                            <div
+                                className='flex items-center justify-between py-4 cursor-pointer'
+                                onClick={() => toggleMobileDropdown('home')}
+                            >
+                                <span className={`text-lg font-semibold ${openMobileDropdown === 'home' ? 'text-[#FB5E01]' : 'text-gray-900'}`}>Home</span>
+                                <IoChevronDownOutline className={`text-lg transition-transform duration-300 ${openMobileDropdown === 'home' ? 'rotate-180 text-[#FB5E01]' : 'text-gray-500'}`} />
+                            </div>
+                            <div className={`overflow-hidden transition-all duration-300 ${openMobileDropdown === 'home' ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}>
+                                <ul className='bg-gray-50 rounded-lg mb-3'>
+                                    <li className='px-5 py-3 text-[#FB5E01] text-[15px] font-medium cursor-pointer'>Home One</li>
+                                    <li className='px-5 py-3 text-gray-700 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300 cursor-pointer'>Home Two</li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        {/* Services */}
+                        <li className='border-b border-gray-200'>
+                            <div
+                                className='flex items-center justify-between py-4 cursor-pointer'
+                                onClick={() => toggleMobileDropdown('services')}
+                            >
+                                <span className={`text-lg font-semibold ${openMobileDropdown === 'services' ? 'text-[#FB5E01]' : 'text-gray-900'}`}>Services</span>
+                                <IoChevronDownOutline className={`text-lg transition-transform duration-300 ${openMobileDropdown === 'services' ? 'rotate-180 text-[#FB5E01]' : 'text-gray-500'}`} />
+                            </div>
+                            <div className={`overflow-hidden transition-all duration-300 ${openMobileDropdown === 'services' ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}>
+                                <ul className='bg-gray-50 rounded-lg mb-3'>
+                                    <li className='px-5 py-3 text-gray-700 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300 cursor-pointer'>Services</li>
+                                    <li className='px-5 py-3 text-gray-700 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300 cursor-pointer'>Service Details</li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        {/* Projects */}
+                        <li className='border-b border-gray-200'>
+                            <div className='py-4 cursor-pointer'>
+                                <span className='text-lg font-semibold text-gray-900 hover:text-[#FB5E01] transition-colors duration-300'>Projects</span>
+                            </div>
+                        </li>
+
+                        {/* Pages */}
+                        <li className='border-b border-gray-200'>
+                            <div
+                                className='flex items-center justify-between py-4 cursor-pointer'
+                                onClick={() => toggleMobileDropdown('pages')}
+                            >
+                                <span className={`text-lg font-semibold ${openMobileDropdown === 'pages' ? 'text-[#FB5E01]' : 'text-gray-900'}`}>Pages</span>
+                                <IoChevronDownOutline className={`text-lg transition-transform duration-300 ${openMobileDropdown === 'pages' ? 'rotate-180 text-[#FB5E01]' : 'text-gray-500'}`} />
+                            </div>
+                            <div className={`overflow-hidden transition-all duration-300 ${openMobileDropdown === 'pages' ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+                                <ul className='bg-gray-50 rounded-lg mb-3'>
+                                    <li className='px-5 py-3 text-gray-700 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300 cursor-pointer'>About Us</li>
+                                    <li className='px-5 py-3 text-gray-700 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300 cursor-pointer'>Team</li>
+                                    <li className='px-5 py-3 text-gray-700 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300 cursor-pointer'>Pricing Plan</li>
+                                    <li className='px-5 py-3 text-gray-700 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300 cursor-pointer'>FAQs</li>
+                                    <li className='px-5 py-3 text-gray-700 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300 cursor-pointer'>Testimonials</li>
+                                    <li className='px-5 py-3 text-gray-700 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300 cursor-pointer'>My Account</li>
+                                    <li className='px-5 py-3 text-gray-700 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300 cursor-pointer'>Privacy & Policy</li>
+                                    <li className='px-5 py-3 text-gray-700 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300 cursor-pointer'>Terms & Conditions</li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        {/* Blog */}
+                        <li className='border-b border-gray-200'>
+                            <div className='py-4 cursor-pointer'>
+                                <span className='text-lg font-semibold text-gray-900 hover:text-[#FB5E01] transition-colors duration-300'>Blog</span>
+                            </div>
+                        </li>
+
+                        {/* Contact Us */}
+                        <li className='border-b border-gray-200'>
+                            <div className='py-4 cursor-pointer'>
+                                <span className='text-lg font-semibold text-gray-900 hover:text-[#FB5E01] transition-colors duration-300'>Contact Us</span>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+
+                {/* Mobile Menu Footer */}
+                <div className='p-5 flex items-center gap-4'>
+                    <HiOutlineMenuAlt1 className='text-3xl text-gray-800 cursor-pointer' />
+                    <button className='text-white text-base font-semibold px-6 py-3 bg-[#FB5E01] hover:bg-black transition-all duration-600 cursor-pointer'>
+                        Let's Talk
+                    </button>
+                </div>
+            </div>
 
 
 
