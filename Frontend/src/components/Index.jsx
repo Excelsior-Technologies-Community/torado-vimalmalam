@@ -84,10 +84,10 @@ const Index = () => {
             {/* OUR SERVICES Section */}
             <section className="">
                 <div className="px-8 py-5 lg:px-50 lg:py-32">
-                    <p className="text-[#FB6B01] font-bold text-xl">OUR SERVICES</p>
+                    <p className="text-[#FB6B01] font-bold md:text-xl text-lg">OUR SERVICES</p>
                     <div className="flex lg:flex-row items-end justify-between">
                         <div className="mt-4">
-                            <p className="font-bold text-5xl">We Push Brands To Reach Their Full<br /> Potential Whatever It Takes</p>
+                            <p className="font-bold md:text-5xl text-4xl">We Push Brands To Reach Their Full<br /> Potential Whatever It Takes</p>
                         </div>
                         <div className="flex gap-3 mt-4 lg:mt-0">
                             <button onClick={() => swiperRef.current?.slidePrev()} className="w-12 h-12 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 hover:bg-[#FB5E01] hover:border-[#FB5E01] hover:text-white group">
@@ -146,8 +146,53 @@ const Index = () => {
 
             {/* About Us Section */}
             <section>
-                <div>
-                    
+                <div className="px-8 py-5 lg:px-50 lg:py-20">
+                    <div className="flex lg:flex-row items-end justify-between">
+                        <div>
+                            <div>
+                                <p className="text-[#FB6B01] font-bold md:text-xl text-lg">ABOUT US</p>
+                                <h1 className="mt-4 font-bold md:text-5xl text-4xl">We Take Pride In Keeping Our<br /> Services In-House</h1>
+                            </div>
+                            <div className="mt-16 flex lg:flex-row items-start justify-evenly">
+                                <div className="">
+                                    <img className="h-150 w-90" src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/design/pride1.jpg" alt="AboutUS1" />
+                                </div>
+                                <div className="w-1/2 mx-15 my-8 flex flex-col gap-5 ">
+                                    <p className="text-md text-gray-700">Lorem ipsum dolor sit amet consectetur adipiscing do eiusmod tempo ncididunt ut labore et dolore magna aliqua quis ipsum suspendisse ultrice risus com</p>
+                                    <div className="flex items-center gap-2 bg-[#ECEFE4] p-5 ">
+                                        <img src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/svgs/check.svg" alt="Check" />
+                                        <p>Content Marketing Strategy</p>
+                                    </div>
+                                    <div className="flex items-center gap-2 bg-[#ECEFE4] p-5 ">
+                                        <img src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/svgs/check.svg" alt="Check" />
+                                        <p>Targeted Demand Generation</p>
+                                    </div>
+                                    <div className="flex items-center gap-2 bg-[#ECEFE4] p-5 ">
+                                        <img src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/svgs/check.svg" alt="Check" />
+                                        <p>Video Marketing Production</p>
+                                    </div>
+                                    <div className="flex items-center gap-2 bg-[#ECEFE4] p-5 ">
+                                        <img src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/svgs/check.svg" alt="Check" />
+                                        <p>Content Creation & Amplification</p>
+                                    </div>
+                                    <div className="mt-5">
+                                        <div className="flex items-center gap-5">
+                                            <img src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/users/pride1.png" alt="SeniorManager" />
+                                            <div className="flex flex-col">
+                                                <p className="font-bold">Benjamin Noahmin</p>
+                                                <p>Senior Manager</p>
+                                            </div>
+                                            <img src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/shapes/user-shape1.png" alt="Signature" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="flex flex-col items-center">
+                            <img className="w-130 h-150" src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/design/pride2.jpg" alt="AboutUS2" />
+                            <div className="w-50 h-50 flex flex-col items-center justify-center border border-[#FB5E01] rounded-full mt-5 bg-[#FB5E01] text-white z-10"><span className="text-6xl font-bold">18+</span><span className="text-xl">Years Experience</span></div>
+                        </div>
+                    </div>
                 </div>
             </section>
         </>
