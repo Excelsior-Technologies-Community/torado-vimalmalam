@@ -1,0 +1,74 @@
+/* ===== Form Modal ===== */
+
+.form-modal {
+    width: 420px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    animation: scaleIn 0.25s ease;
+}
+
+.form-modal h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 18px;
+}
+
+.form-modal form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.form-modal input {
+    width: 100%;
+    padding: 10px 12px;
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.form-modal input:focus {
+    border-color: var(--accent);
+    outline: none;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.form-actions button {
+    padding: 9px 18px;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.form-actions button[type="button"] {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+}
+
+.form-actions button[type="button"]:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.form-actions button[type="submit"] {
+    background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+    border: none;
+    color: white;
+}
+
+.form-actions button[type="submit"]:hover {
+    transform: translateY(-1px);
+}

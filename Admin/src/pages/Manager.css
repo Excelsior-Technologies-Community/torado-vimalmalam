@@ -1,0 +1,84 @@
+/* ===== Manager Page ===== */
+
+.manager-container {
+    padding: 32px;
+    animation: fadeIn 0.3s ease;
+}
+
+.manager-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.manager-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.manager-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    transition: all 0.25s ease;
+}
+
+.manager-card:hover {
+    border-color: rgba(255,255,255,0.1);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.manager-profile-img {
+    width: 140px;
+    height: 140px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 2px solid var(--border-color);
+}
+
+.manager-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.manager-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.manager-role {
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.manager-signature {
+    margin-top: 10px;
+    height: 60px;
+}
+
+.manager-edit-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg,var(--accent),var(--accent-hover));
+    border: none;
+    border-radius: var(--radius-sm);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.manager-edit-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 18px rgba(251,94,1,0.35);
+}

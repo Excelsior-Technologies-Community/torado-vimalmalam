@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect } from "react";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
@@ -10,12 +11,22 @@ const API = "http://localhost:5000/api";
 const Index = () => {
     const swiperRef = useRef(null);
     const [services, setServices] = useState([]);
+    const [manager, setManager] = useState(null);
 
+    // For Services Section
     useEffect(() => {
         fetch(`${API}/services`)
             .then((res) => res.json())
             .then((data) => setServices(data))
             .catch((err) => console.error("Error fetching services:", err));
+    }, []);
+
+    // For Manager Section
+    useEffect(() => {
+        fetch(`${API}/manager`)
+            .then((res) => res.json())
+            .then((data) => setManager(data))
+            .catch((err) => console.error("Error fetching manager:", err));
     }, []);
 
     // Duplicate slides so loop works when slidesPerView equals total slides
@@ -176,14 +187,28 @@ const Index = () => {
                                         <p>Content Creation & Amplification</p>
                                     </div>
                                     <div className="mt-5">
-                                        <div className="flex items-center gap-5">
-                                            <img src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/users/pride1.png" alt="SeniorManager" />
-                                            <div className="flex flex-col">
-                                                <p className="font-bold">Benjamin Noahmin</p>
-                                                <p>Senior Manager</p>
+                                        {manager && (
+                                            <div className="flex items-center gap-5">
+
+                                                <img
+                                                    className="w-16 h-16 rounded-full object-cover"
+                                                    src={manager.profileImage}
+                                                    alt="SeniorManager"
+                                                />
+
+                                                <div className="flex flex-col">
+                                                    <p className="font-bold">{manager.name}</p>
+                                                    <p>{manager.role}</p>
+                                                </div>
+
+                                                <img
+                                                    className="w-24"
+                                                    src={manager.signatureImage}
+                                                    alt="Signature"
+                                                />
+
                                             </div>
-                                            <img src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/shapes/user-shape1.png" alt="Signature" />
-                                        </div>
+                                        )}
                                     </div>
                                 </div>
                             </div>
