@@ -2,9 +2,11 @@ import { useRef, useState, useEffect } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
+import { Navigation, Pagination, EffectCoverflow } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import "swiper/css/pagination";
+import '../Index.css';
 
 const API = "http://localhost:5000/api";
 
@@ -31,6 +33,33 @@ const Index = () => {
 
     // Duplicate slides so loop works when slidesPerView equals total slides
     const slides = services.length > 0 ? [...services, ...services] : [];
+
+    const slide = [
+        {
+            image:
+                "https://images.unsplash.com/photo-1556761175-b413da4baf72",
+            title: "Demand & Lead Generation",
+            tag: "DATA MARKETING",
+        },
+        {
+            image:
+                "https://images.unsplash.com/photo-1557804506-669a67965ba0",
+            title: "Digital Strategy",
+            tag: "MARKETING",
+        },
+        {
+            image:
+                "https://images.unsplash.com/photo-1542744173-8e7e53415bb0",
+            title: "Business Consulting",
+            tag: "CONSULTING",
+        },
+        {
+            image:
+                "https://images.unsplash.com/photo-1521737604893-d14cc237f11d",
+            title: "Startup Planning",
+            tag: "STARTUP",
+        },
+    ];
 
     return (
         <>
@@ -216,6 +245,78 @@ const Index = () => {
                         <div className="flex flex-col items-center">
                             <img className="w-130 h-150" src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/design/pride2.jpg" alt="AboutUS2" />
                             <div className="w-50 h-50 flex flex-col items-center justify-center border border-[#FB5E01] rounded-full mt-5 bg-[#FB5E01] text-white z-10"><span className="text-6xl font-bold">18+</span><span className="text-xl">Years Experience</span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Projects Section */}
+            <section className='relative z-10 overflow-x-clip bg-[#152C39] pb-50'>
+                <div className="px-8 py-5 lg:px-50 lg:py-32">
+                    <div className="text-center">
+                        <p className="text-[#F84E25] text-xl font-semibold">RECENT PROJECTS</p>
+                        <p className="text-white font-bold text-5xl">Our High-Impact Content Marketing Projects</p>
+                    </div>
+                    <div className="">
+                        <div className="py-20">
+
+                            <div className="w-[90%] ml-[10%]">
+
+                                <Swiper
+                                    effect={"coverflow"}
+                                    grabCursor={true}
+                                    centeredSlides={true}
+                                    slidesPerView={3}
+                                    slideToClickedSlide={true}
+                                    loop={true}
+                                    pagination={{ clickable: true }}
+                                    modules={[EffectCoverflow, Pagination]}
+
+                                    coverflowEffect={{
+                                        rotate: 0,
+                                        stretch: 0,
+                                        depth: 150,
+                                        modifier: 1,
+                                        slideShadows: false,
+                                    }}
+                                >
+                                    {slide.map((slide, index) => (
+                                        <SwiperSlide key={index}>
+
+                                            <div className="relative">
+
+                                                <img
+                                                    src={slide.image}
+                                                    className="w-full h-[420px] object-cover rounded-md"
+                                                />
+
+                                                {/* white info card */}
+                                                <div className="absolute bottom-8 left-8 right-8 bg-white p-6 flex justify-between items-center rounded">
+
+                                                    <div>
+                                                        <p className="text-orange-500 text-sm font-semibold">
+                                                            {slide.tag}
+                                                        </p>
+
+                                                        <h3 className="text-lg font-semibold">
+                                                            {slide.title}
+                                                        </h3>
+                                                    </div>
+
+                                                    <div className="bg-orange-500 w-10 h-10 flex items-center justify-center text-white rounded-full">
+                                                        →
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </SwiperSlide>
+                                    ))}
+                                </Swiper>
+
+                            </div>
+
                         </div>
                     </div>
                 </div>
