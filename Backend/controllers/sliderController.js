@@ -2,21 +2,36 @@ const Slider = require("../models/Slider");
 
 exports.createSlider = async (req, res) => {
     try {
-        const newSlider = new Slider({
-            image: req.file.filename,
+
+        const slider = new Slider({
+            image: req.body.image,
             title: req.body.title,
             description: req.body.description,
             tag: req.body.tag
         });
 
-        await newSlider.save();
-        res.json(newSlider);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
+        await slider.save();
+
+        res.json(slider);
+
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 };
 
-exports.getSlider = async (req, res) => {
-    const sliders = await Slider.find();
-    res.json(sliders);
+
+exports.getSliders = async (req, res) => {
+
+    try {
+
+        const sliders = await Slider.find();
+
+        res.json(sliders);
+
+    } catch (error) {
+
+        res.status(500).json({ message: error.message });
+
+    }
+
 };

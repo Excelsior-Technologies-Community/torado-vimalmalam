@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Services from "./pages/Services";
 import Manager from "./pages/Manager";
+import Slides from "./pages/Slides";
 
 function App() {
   const isLoggedIn = () => !!localStorage.getItem("token");
@@ -17,6 +18,10 @@ function App() {
         <Route
           path="/manager"
           element={isLoggedIn() ? <Manager /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/slides"
+          element={isLoggedIn() ? <Slides /> : <Navigate to="/slides" />}
         />
         <Route path="*" element={<Navigate to="/services" />} />
       </Routes>

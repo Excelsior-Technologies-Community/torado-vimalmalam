@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect } from "react";
+import axios from "axios";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -12,8 +13,10 @@ const API = "http://localhost:5000/api";
 
 const Index = () => {
     const swiperRef = useRef(null);
+
     const [services, setServices] = useState([]);
     const [manager, setManager] = useState(null);
+    const [slide, setSlide] = useState([]);
 
     // For Services Section
     useEffect(() => {
@@ -31,35 +34,18 @@ const Index = () => {
             .catch((err) => console.error("Error fetching manager:", err));
     }, []);
 
+    // For Project Slides
+    useEffect(() => {
+        const fetchSlides = async () => {
+            const res = await axios.get(`${API}/sliders`);
+            setSlide(res.data);
+        };
+
+        fetchSlides();
+    }, []);
+
     // Duplicate slides so loop works when slidesPerView equals total slides
     const slides = services.length > 0 ? [...services, ...services] : [];
-
-    const slide = [
-        {
-            image:
-                "https://images.unsplash.com/photo-1556761175-b413da4baf72",
-            title: "Demand & Lead Generation",
-            tag: "DATA MARKETING",
-        },
-        {
-            image:
-                "https://images.unsplash.com/photo-1557804506-669a67965ba0",
-            title: "Digital Strategy",
-            tag: "MARKETING",
-        },
-        {
-            image:
-                "https://images.unsplash.com/photo-1542744173-8e7e53415bb0",
-            title: "Business Consulting",
-            tag: "CONSULTING",
-        },
-        {
-            image:
-                "https://images.unsplash.com/photo-1521737604893-d14cc237f11d",
-            title: "Startup Planning",
-            tag: "STARTUP",
-        },
-    ];
 
     return (
         <>
@@ -157,7 +143,7 @@ const Index = () => {
                             }}
                             className="mt-10 [&_.swiper-button-next]:hidden [&_.swiper-button-prev]:hidden">
 
-                            {slides.map((service, index) => (
+                            {services.map((service, index) => (
                                 <SwiperSlide key={index}>
                                     <div className="min-h-[300px] border border-gray-200 bg-white shadow-lg">
                                         <div className="pt-10 px-10 pb-10">
@@ -280,14 +266,14 @@ const Index = () => {
                                         slideShadows: false,
                                     }}
                                 >
-                                    {slide.map((slide, index) => (
-                                        <SwiperSlide key={index}>
+                                    {slide.map((slide) => (
+                                        <SwiperSlide key={slide._id}>
 
                                             <div className="relative">
 
                                                 <img
                                                     src={slide.image}
-                                                    className="w-full h-[420px] object-cover rounded-md"
+                                                    className="w-full h-105 object-cover rounded-md"
                                                 />
 
                                                 {/* white info card */}
@@ -321,6 +307,9 @@ const Index = () => {
                     </div>
                 </div>
             </section>
+
+            {/* WHY CHOOSE US */}
+            <section></section>
         </>
     )
 }
