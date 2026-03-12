@@ -172,7 +172,7 @@ export default function Slides() {
 
                 <button
                     onClick={addSlide}
-                    className="mt-8 bg-gradient-to-r from-orange-500 to-orange-600 
+                    className="mt-8 bg-linear-to-r from-orange-500 to-orange-600 
         hover:from-orange-600 hover:to-orange-700
         text-white px-7 py-3 rounded-xl font-medium
         shadow-md hover:shadow-lg transition-all duration-200"

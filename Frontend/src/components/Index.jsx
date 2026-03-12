@@ -18,6 +18,32 @@ const Index = () => {
     const [manager, setManager] = useState(null);
     const [slide, setSlide] = useState([]);
 
+    // For Choose Us Section
+    const [active, setActive] = useState(0);
+
+    const allServices = [
+        {
+            title: "Demand & Lead Generation",
+            desc: "Vestibulum ac diam sit amet quam vehicula elementum dolore magna Praesent sapien pellentesque ne egestas non.",
+            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/choose/choose1.png"
+        },
+        {
+            title: "Digital Marketing Strategy",
+            desc: "Vestibulum ac diam sit amet quam vehicula elementum dolore magna Praesent sapien pellentesque ne egestas non.",
+            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/choose/choose2.png"
+        },
+        {
+            title: "Search Engine Optimization",
+            desc: "Vestibulum ac diam sit amet quam vehicula elementum dolore magna Praesent sapien pellentesque ne egestas non.",
+            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/choose/choose3.png"
+        },
+        {
+            title: "Conversion Rate Optimization",
+            desc: "Vestibulum ac diam sit amet quam vehicula elementum dolore magna Praesent sapien pellentesque ne egestas non.",
+            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/choose/choose4.png"
+        }
+    ];
+
     // For Services Section
     useEffect(() => {
         fetch(`${API}/services`)
@@ -172,18 +198,18 @@ const Index = () => {
 
             {/* About Us Section */}
             <section>
-                <div className="px-8 py-5 lg:px-50 lg:py-20">
-                    <div className="flex lg:flex-row items-end justify-between">
+                <div className="px-6 py-5 lg:px-50 lg:py-20">
+                    <div className="flex flex-col md:flex-row items-center md:items-end justify-between">
                         <div>
                             <div>
                                 <p className="text-[#FB6B01] font-bold md:text-xl text-lg">ABOUT US</p>
-                                <h1 className="mt-4 font-bold md:text-5xl text-4xl">We Take Pride In Keeping Our<br /> Services In-House</h1>
+                                <h1 className="mt-4 font-bold md:text-5xl text-2xl">We Take Pride In Keeping Our<br /> Services In-House</h1>
                             </div>
-                            <div className="mt-16 flex lg:flex-row items-start justify-evenly">
-                                <div className="">
+                            <div className="mt-10 flex flex-col md:flex-row items-center md:items-start gap-8">
+                                <div className="h-auto md:h-150 w-full md:w-90">
                                     <img className="h-150 w-90" src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/design/pride1.jpg" alt="AboutUS1" />
                                 </div>
-                                <div className="w-1/2 mx-15 my-8 flex flex-col gap-5 ">
+                                <div className="order-2 md:order-2 w-full md:w-1/2 md:mx-15 my-8 flex flex-col gap-5">
                                     <p className="text-md text-gray-700">Lorem ipsum dolor sit amet consectetur adipiscing do eiusmod tempo ncididunt ut labore et dolore magna aliqua quis ipsum suspendisse ultrice risus com</p>
                                     <div className="flex items-center gap-2 bg-[#ECEFE4] p-5 ">
                                         <img src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/svgs/check.svg" alt="Check" />
@@ -228,8 +254,8 @@ const Index = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="flex flex-col items-center">
-                            <img className="w-130 h-150" src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/design/pride2.jpg" alt="AboutUS2" />
+                        <div className="order-3 md:order-none flex flex-col items-center mt-10 md:mt-0">
+                            <img className="w-full md:w-130 h-auto md:h-150" src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/design/pride2.jpg" alt="AboutUS2" />
                             <div className="w-50 h-50 flex flex-col items-center justify-center border border-[#FB5E01] rounded-full mt-5 bg-[#FB5E01] text-white z-10"><span className="text-6xl font-bold">18+</span><span className="text-xl">Years Experience</span></div>
                         </div>
                     </div>
@@ -237,22 +263,35 @@ const Index = () => {
             </section>
 
             {/* Projects Section */}
-            <section className='relative z-10 overflow-x-clip bg-[#152C39] pb-50'>
-                <div className="px-8 py-5 lg:px-50 lg:py-32">
+            <section className='relative z-10 overflow-x-clip bg-[#152C39]'>
+                <div className="px-8 py-5 md:px-50 md:py-32">
                     <div className="text-center">
-                        <p className="text-[#F84E25] text-xl font-semibold">RECENT PROJECTS</p>
-                        <p className="text-white font-bold text-5xl">Our High-Impact Content Marketing Projects</p>
+                        <p className="text-[#F84E25] md:text-xl text-lg font-semibold">RECENT PROJECTS</p>
+                        <p className="text-white font-bold md:text-5xl text-2xl">Our High-Impact Content Marketing Projects</p>
                     </div>
                     <div className="">
                         <div className="py-20">
 
-                            <div className="w-[90%] ml-[10%]">
+                            <div className="w-full md:w-[90%] md:ml-[10%]">
 
                                 <Swiper
                                     effect={"coverflow"}
                                     grabCursor={true}
                                     centeredSlides={true}
-                                    slidesPerView={3}
+                                    breakpoints={{
+                                        0: {
+                                            slidesPerView: 1,
+                                        },
+                                        640: {
+                                            slidesPerView: 1,
+                                        },
+                                        768: {
+                                            slidesPerView: 2,
+                                        },
+                                        1024: {
+                                            slidesPerView: 3,
+                                        },
+                                    }}
                                     slideToClickedSlide={true}
                                     loop={true}
                                     pagination={{ clickable: true }}
@@ -273,7 +312,7 @@ const Index = () => {
 
                                                 <img
                                                     src={slide.image}
-                                                    className="w-full h-105 object-cover rounded-md"
+                                                    className="w-full h-100 md:h-105 object-cover rounded-md"
                                                 />
 
                                                 {/* white info card */}
@@ -309,7 +348,47 @@ const Index = () => {
             </section>
 
             {/* WHY CHOOSE US */}
-            <section></section>
+            <section>
+                <div className="px-8 py-5 lg:px-50 lg:py-32">
+                    <div className="">
+                        <div>
+                            <p className="text-[#F84E25] text-xl font-semibold">WHY CHOOSE US</p>
+                        </div>
+                        <div className="flex justify-between">
+                            <p className="mt-5 font-bold text-5xl">Helping Operto 4X Its Revenue In <br /> 12 Months</p>
+                            <div>
+                                <button className='text-white text-sm md:text-lg font-semibold px-4 py-2 md:px-6 md:py-3 bg-[#FB5E01] hover:bg-black transition-all duration-600 cursor-pointer'>
+                                    View ALL Services
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="flex mt-10">
+                        {/* Left Side */}
+                        <div className="w-1/2 space-y-10">
+                            {allServices.map((allServices, index) => (
+                                <div key={index} onMouseEnter={() => setActive(index)} className="cursor-pointer border-b pb-6 group">
+                                    <h2 className={`text-2xl font-bold ${active === index ? "text-black" : "text-gray-500"}`}>
+                                        {allServices.title}
+                                    </h2>
+                                    <p className="text-gray-500 mt-2">
+                                        {allServices.desc}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Right Side */}
+                        <div className="w-1/2 flex justify-center items-center relative">
+                            <img src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/shapes/choose-shape1.png" className="absolute w-[400px]" />
+                            <img
+                                src={allServices[active].image}
+                                className="relative w-[500px] left-15 top-15 rounded-xl rotate-12 transition-all duration-500"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </section>
         </>
     )
 }
