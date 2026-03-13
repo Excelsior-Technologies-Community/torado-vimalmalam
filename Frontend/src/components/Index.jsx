@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import axios from "axios";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
+import { GoArrowDownRight } from "react-icons/go";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, EffectCoverflow } from 'swiper/modules';
 import 'swiper/css';
@@ -17,32 +18,12 @@ const Index = () => {
     const [services, setServices] = useState([]);
     const [manager, setManager] = useState(null);
     const [slide, setSlide] = useState([]);
+    const [projects, setProjects] = useState([]);
 
     // For Choose Us Section
     const [active, setActive] = useState(0);
 
-    const allServices = [
-        {
-            title: "Demand & Lead Generation",
-            desc: "Vestibulum ac diam sit amet quam vehicula elementum dolore magna Praesent sapien pellentesque ne egestas non.",
-            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/choose/choose1.png"
-        },
-        {
-            title: "Digital Marketing Strategy",
-            desc: "Vestibulum ac diam sit amet quam vehicula elementum dolore magna Praesent sapien pellentesque ne egestas non.",
-            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/choose/choose2.png"
-        },
-        {
-            title: "Search Engine Optimization",
-            desc: "Vestibulum ac diam sit amet quam vehicula elementum dolore magna Praesent sapien pellentesque ne egestas non.",
-            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/choose/choose3.png"
-        },
-        {
-            title: "Conversion Rate Optimization",
-            desc: "Vestibulum ac diam sit amet quam vehicula elementum dolore magna Praesent sapien pellentesque ne egestas non.",
-            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/choose/choose4.png"
-        }
-    ];
+
 
     // For Services Section
     useEffect(() => {
@@ -68,6 +49,14 @@ const Index = () => {
         };
 
         fetchSlides();
+    }, []);
+
+    // For Choose US Section
+    useEffect(() => {
+        fetch(`${API}/projects`)
+            .then((res) => res.json())
+            .then((data) => setProjects(data))
+            .catch((err) => console.error("Error fetching services:", err));
     }, []);
 
     // Duplicate slides so loop works when slidesPerView equals total slides
@@ -366,25 +355,33 @@ const Index = () => {
                     <div className="flex mt-10">
                         {/* Left Side */}
                         <div className="w-1/2 space-y-10">
-                            {allServices.map((allServices, index) => (
-                                <div key={index} onMouseEnter={() => setActive(index)} className="cursor-pointer border-b pb-6 group">
-                                    <h2 className={`text-2xl font-bold ${active === index ? "text-black" : "text-gray-500"}`}>
-                                        {allServices.title}
-                                    </h2>
-                                    <p className="text-gray-500 mt-2">
-                                        {allServices.desc}
-                                    </p>
-                                </div>
+                            {projects.map((project, index) => (
+                                <>
+                                    <div key={project._id || index} className="flex">
+                                        <div onMouseEnter={() => setActive(index)} className="cursor-pointer border-b pb-6 group">
+                                            <h2 className={`text-2xl font-bold ${active === index ? "text-black" : "text-gray-500"}`}>
+                                                {project.title}
+                                            </h2>
+                                            <p className="text-gray-500 mt-2">
+                                                {project.desc}
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <button className="w-14 h-14 flex items-center justify-center shadow-xl rounded-full bg-white text-2xl text-black hover:text-white hover:bg-[#FB5E01] transition">
+                                                <GoArrowDownRight />
+                                            </button>
+                                        </div>
+                                    </div>
+                                </>
                             ))}
                         </div>
 
                         {/* Right Side */}
                         <div className="w-1/2 flex justify-center items-center relative">
-                            <img src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/shapes/choose-shape1.png" className="absolute w-[400px]" />
-                            <img
-                                src={allServices[active].image}
-                                className="relative w-[500px] left-15 top-15 rounded-xl rotate-12 transition-all duration-500"
-                            />
+                            <img src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/shapes/choose-shape1.png" className="absolute w-100" />
+                            {projects.length > 0 && (
+                                <img src={projects[active]?.image} className="relative w-125 left-18 top-5 rounded-xl rotate-4 transition-all duration-500" />
+                            )}
                         </div>
                     </div>
                 </div>
