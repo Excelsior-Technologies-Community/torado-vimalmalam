@@ -133,6 +133,26 @@ export default function Services() {
 
                         Projects
                     </Link>
+                    <Link to="/team" className="nav-item">
+                        <svg
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        >
+                            <path d="M17 21v-2a4 4 0 0 0-3-3.87" />
+                            <path d="M7 21v-2a4 4 0 0 1 3-3.87" />
+                            <circle cx="12" cy="7" r="4" />
+                            <path d="M18 8a3 3 0 1 1 0-6" />
+                            <path d="M6 8a3 3 0 1 0 0-6" />
+                        </svg>
+
+                        Team
+                    </Link>
                 </nav>
 
                 <div className="sidebar-footer">

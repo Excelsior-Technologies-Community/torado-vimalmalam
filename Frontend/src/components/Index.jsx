@@ -3,12 +3,18 @@ import axios from "axios";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { GoArrowDownRight } from "react-icons/go";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, EffectCoverflow } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
+import {
+    FaFacebookF,
+    FaTwitter,
+    FaInstagram,
+    FaLinkedinIn,
+} from "react-icons/fa";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, EffectCoverflow } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
 import "swiper/css/pagination";
-import '../Index.css';
+import "../Index.css";
 
 const API = "http://localhost:5000/api";
 
@@ -19,11 +25,43 @@ const Index = () => {
     const [manager, setManager] = useState(null);
     const [slide, setSlide] = useState([]);
     const [projects, setProjects] = useState([]);
+    const [team, setTeam] = useState([]);
 
     // For Choose Us Section
     const [active, setActive] = useState(0);
 
-
+    const teamMembers = [
+        {
+            _id: "1",
+            name: "Knight Heather",
+            role: "CEO & Founder",
+            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/teams/team1.jpg"
+        },
+        {
+            _id: "2",
+            name: "Ronald Agaton",
+            role: "Web Designer",
+            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/teams/team2.jpg"
+        },
+        {
+            _id: "3",
+            name: "Melesha Brawon",
+            role: "Senior Manager",
+            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/teams/team3.jpg"
+        },
+        {
+            _id: "4",
+            name: "Gertrude Barrow",
+            role: "Businessman",
+            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/teams/team4.jpg"
+        },
+        {
+            _id: "5",
+            name: "Kishck Gemma",
+            role: "Product Manager",
+            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/teams/team1.jpg"
+        }
+    ];
 
     // For Services Section
     useEffect(() => {
@@ -59,21 +97,48 @@ const Index = () => {
             .catch((err) => console.error("Error fetching services:", err));
     }, []);
 
+    // For Team
+    const fetchTeam = async () => {
+        const res = await fetch(API);
+        const data = await res.json();
+        setTeam(data);
+    };
+
+    useEffect(() => {
+        fetchTeam();
+    }, []);
+
     // Duplicate slides so loop works when slidesPerView equals total slides
     const slides = services.length > 0 ? [...services, ...services] : [];
 
     return (
         <>
             {/* Hero Section */}
-            <section className='relative z-10 overflow-x-clip bg-[#152C39] pb-50'>
+            <section className="relative z-10 overflow-x-clip bg-[#152C39] pb-50">
                 <div className="px-8 py-5 lg:px-30 lg:py-32">
                     <div className="">
-                        <h1 className="text-white text-xl lg:text-8xl font-bold">Grow Your Business <br /> Faster With <span className="text-[#FB5E01]">Content</span>-led SEO</h1>
-                        <p className='text-zinc-300 text-lg lg:text-[17px] font-normal lg:max-w-none mt-5'>Maecenas euismod viverra purus volutpat posuere mauris tristique quisokaft mauris facilisis consequat dolor luctus imperdiet eget nulla <br /> europi venenatis libero proin nec nisi auctor pulvinar massa dolore magna</p>
+                        <h1 className="text-white text-xl lg:text-8xl font-bold">
+                            Grow Your Business <br /> Faster With{" "}
+                            <span className="text-[#FB5E01]">Content</span>-led SEO
+                        </h1>
+                        <p className="text-zinc-300 text-lg lg:text-[17px] font-normal lg:max-w-none mt-5">
+                            Maecenas euismod viverra purus volutpat posuere mauris tristique
+                            quisokaft mauris facilisis consequat dolor luctus imperdiet eget
+                            nulla <br /> europi venenatis libero proin nec nisi auctor
+                            pulvinar massa dolore magna
+                        </p>
                     </div>
-                    <div className='hidden lg:block absolute top-[80%] left-[130px] translate-x-[50px] -translate-y-[100px]'>
-                        <img className='w-40 h-40' src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/shapes/video-shape2.png" alt="AboutUsLink" />
-                        <img className='absolute top-[65px] left-[65px] translate-x-[50%] translate-y-[50%]' src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/svgs/about-link.svg" alt="AboutUsLink" />
+                    <div className="hidden lg:block absolute top-[80%] left-[130px] translate-x-[50px] -translate-y-[100px]">
+                        <img
+                            className="w-40 h-40"
+                            src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/shapes/video-shape2.png"
+                            alt="AboutUsLink"
+                        />
+                        <img
+                            className="absolute top-[65px] left-[65px] translate-x-[50%] translate-y-[50%]"
+                            src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/svgs/about-link.svg"
+                            alt="AboutUsLink"
+                        />
                     </div>
                 </div>
                 <motion.div
@@ -81,11 +146,15 @@ const Index = () => {
                     transition={{
                         duration: 300,
                         repeat: Infinity,
-                        ease: "linear"
+                        ease: "linear",
                     }}
                     className="hidden lg:block"
                 >
-                    <img className="absolute flex z-100 h-18 w-auto top-[165px] left-[100px]" src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/shapes/design-shape2.png" alt="MotionImage" />
+                    <img
+                        className="absolute flex z-100 h-18 w-auto top-[165px] left-[100px]"
+                        src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/shapes/design-shape2.png"
+                        alt="MotionImage"
+                    />
                 </motion.div>
             </section>
 
@@ -100,24 +169,57 @@ const Index = () => {
                     </div>
                     {/* Mobile: images in normal flow; Desktop: absolute positioned */}
                     <div className="flex flex-col gap-4 mt-6 lg:hidden">
-                        <img className="w-full h-auto rounded-lg" src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/design/design1.jpg" alt="HeroImage1" />
-                        <img className="w-full h-auto rounded-lg" src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/design/design2.jpg" alt="HeroImage2" />
+                        <img
+                            className="w-full h-auto rounded-lg"
+                            src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/design/design1.jpg"
+                            alt="HeroImage1"
+                        />
+                        <img
+                            className="w-full h-auto rounded-lg"
+                            src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/design/design2.jpg"
+                            alt="HeroImage2"
+                        />
                     </div>
                     <div className="hidden lg:block">
-                        <img className="z-100 absolute lg:h-120 w-auto lg:top-[-380px] lg:left-[620px] translate-x-[50%] translate-y-[50%]" src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/design/design1.jpg" alt="HeroImage1" />
+                        <img
+                            className="z-100 absolute lg:h-120 w-auto lg:top-[-380px] lg:left-[620px] translate-x-[50%] translate-y-[50%]"
+                            src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/design/design1.jpg"
+                            alt="HeroImage1"
+                        />
                     </div>
                     <div className="hidden lg:block">
-                        <img className="z-100 absolute lg:h-190 w-auto lg:top-[-640px] lg:left-[1050px] translate-x-[50%] translate-y-[50%]" src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/design/design2.jpg" alt="HeroImage2" />
+                        <img
+                            className="z-100 absolute lg:h-190 w-auto lg:top-[-640px] lg:left-[1050px] translate-x-[50%] translate-y-[50%]"
+                            src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/design/design2.jpg"
+                            alt="HeroImage2"
+                        />
                     </div>
                 </div>
                 <div className="lg:px-30 lg:py-20 py-10 lg:mt-40">
-                    <p className="lg:text-xl text-sm font-semibold text-center">We've helped great brands reach new heights</p>
+                    <p className="lg:text-xl text-sm font-semibold text-center">
+                        We've helped great brands reach new heights
+                    </p>
                     <div className="flex gap-5 flex-col lg:flex-row mt-18 lg:justify-around items-center justify-center">
-                        <img src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/partners/partner1.png" alt="Uelphix" />
-                        <img src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/partners/partner2.png" alt="Logo2" />
-                        <img src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/partners/partner3.png" alt="Sracle" />
-                        <img src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/partners/partner4.png" alt="Logo4" />
-                        <img src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/partners/partner5.png" alt="Puadien" />
+                        <img
+                            src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/partners/partner1.png"
+                            alt="Uelphix"
+                        />
+                        <img
+                            src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/partners/partner2.png"
+                            alt="Logo2"
+                        />
+                        <img
+                            src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/partners/partner3.png"
+                            alt="Sracle"
+                        />
+                        <img
+                            src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/partners/partner4.png"
+                            alt="Logo4"
+                        />
+                        <img
+                            src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/partners/partner5.png"
+                            alt="Puadien"
+                        />
                     </div>
                 </div>
             </section>
@@ -125,20 +227,53 @@ const Index = () => {
             {/* OUR SERVICES Section */}
             <section className="">
                 <div className="px-8 py-5 lg:px-50 lg:py-32">
-                    <p className="text-[#FB6B01] font-bold md:text-xl text-lg">OUR SERVICES</p>
+                    <p className="text-[#FB6B01] font-bold md:text-xl text-lg">
+                        OUR SERVICES
+                    </p>
                     <div className="flex lg:flex-row items-end justify-between">
                         <div className="mt-4">
-                            <p className="font-bold md:text-5xl text-4xl">We Push Brands To Reach Their Full<br /> Potential Whatever It Takes</p>
+                            <p className="font-bold md:text-5xl text-4xl">
+                                We Push Brands To Reach Their Full
+                                <br /> Potential Whatever It Takes
+                            </p>
                         </div>
                         <div className="flex gap-3 mt-4 lg:mt-0">
-                            <button onClick={() => swiperRef.current?.slidePrev()} className="w-12 h-12 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 hover:bg-[#FB5E01] hover:border-[#FB5E01] hover:text-white group">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-600 group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                            <button
+                                onClick={() => swiperRef.current?.slidePrev()}
+                                className="w-12 h-12 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 hover:bg-[#FB5E01] hover:border-[#FB5E01] hover:text-white group"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-5 w-5 text-gray-600 group-hover:text-white transition-colors duration-300"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    strokeWidth={2}
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M15 19l-7-7 7-7"
+                                    />
                                 </svg>
                             </button>
-                            <button onClick={() => swiperRef.current?.slideNext()} className="w-12 h-12 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 hover:bg-[#FB5E01] hover:border-[#FB5E01] hover:text-white group">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-600 group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                            <button
+                                onClick={() => swiperRef.current?.slideNext()}
+                                className="w-12 h-12 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 hover:bg-[#FB5E01] hover:border-[#FB5E01] hover:text-white group"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-5 w-5 text-gray-600 group-hover:text-white transition-colors duration-300"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    strokeWidth={2}
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M9 5l7 7-7 7"
+                                    />
                                 </svg>
                             </button>
                         </div>
@@ -156,23 +291,36 @@ const Index = () => {
                                 640: { slidesPerView: 1 },
                                 1024: { slidesPerView: 3 },
                             }}
-                            className="mt-10 [&_.swiper-button-next]:hidden [&_.swiper-button-prev]:hidden">
-
+                            className="mt-10 [&_.swiper-button-next]:hidden [&_.swiper-button-prev]:hidden"
+                        >
                             {services.map((service, index) => (
                                 <SwiperSlide key={index}>
                                     <div className="min-h-[300px] border border-gray-200 bg-white shadow-lg">
                                         <div className="pt-10 px-10 pb-10">
                                             <div>
-                                                <img className="mb-9" src={service.image} alt={service.title} />
+                                                <img
+                                                    className="mb-9"
+                                                    src={service.image}
+                                                    alt={service.title}
+                                                />
                                             </div>
                                             <div>
-                                                <p className="text-2xl font-bold mb-4">{service.title}</p>
-                                                <p className="text-md text-gray-700">{service.description}</p>
+                                                <p className="text-2xl font-bold mb-4">
+                                                    {service.title}
+                                                </p>
+                                                <p className="text-md text-gray-700">
+                                                    {service.description}
+                                                </p>
                                             </div>
                                             <div>
                                                 <ul className="list-disc pl-5 mt-4 space-y-2">
                                                     {service.bullets?.map((bullet, i) => (
-                                                        <li key={i} className="marker:text-[#FB5E01] marker:text-2xl font-bold text-lg">{bullet}</li>
+                                                        <li
+                                                            key={i}
+                                                            className="marker:text-[#FB5E01] marker:text-2xl font-bold text-lg"
+                                                        >
+                                                            {bullet}
+                                                        </li>
                                                     ))}
                                                 </ul>
                                             </div>
@@ -191,35 +339,59 @@ const Index = () => {
                     <div className="flex flex-col md:flex-row items-center md:items-end justify-between">
                         <div>
                             <div>
-                                <p className="text-[#FB6B01] font-bold md:text-xl text-lg">ABOUT US</p>
-                                <h1 className="mt-4 font-bold md:text-5xl text-2xl">We Take Pride In Keeping Our<br /> Services In-House</h1>
+                                <p className="text-[#FB6B01] font-bold md:text-xl text-lg">
+                                    ABOUT US
+                                </p>
+                                <h1 className="mt-4 font-bold md:text-5xl text-2xl">
+                                    We Take Pride In Keeping Our
+                                    <br /> Services In-House
+                                </h1>
                             </div>
                             <div className="mt-10 flex flex-col md:flex-row items-center md:items-start gap-8">
                                 <div className="h-auto md:h-150 w-full md:w-90">
-                                    <img className="h-150 w-90" src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/design/pride1.jpg" alt="AboutUS1" />
+                                    <img
+                                        className="h-150 w-90"
+                                        src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/design/pride1.jpg"
+                                        alt="AboutUS1"
+                                    />
                                 </div>
                                 <div className="order-2 md:order-2 w-full md:w-1/2 md:mx-15 my-8 flex flex-col gap-5">
-                                    <p className="text-md text-gray-700">Lorem ipsum dolor sit amet consectetur adipiscing do eiusmod tempo ncididunt ut labore et dolore magna aliqua quis ipsum suspendisse ultrice risus com</p>
+                                    <p className="text-md text-gray-700">
+                                        Lorem ipsum dolor sit amet consectetur adipiscing do eiusmod
+                                        tempo ncididunt ut labore et dolore magna aliqua quis ipsum
+                                        suspendisse ultrice risus com
+                                    </p>
                                     <div className="flex items-center gap-2 bg-[#ECEFE4] p-5 ">
-                                        <img src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/svgs/check.svg" alt="Check" />
+                                        <img
+                                            src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/svgs/check.svg"
+                                            alt="Check"
+                                        />
                                         <p>Content Marketing Strategy</p>
                                     </div>
                                     <div className="flex items-center gap-2 bg-[#ECEFE4] p-5 ">
-                                        <img src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/svgs/check.svg" alt="Check" />
+                                        <img
+                                            src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/svgs/check.svg"
+                                            alt="Check"
+                                        />
                                         <p>Targeted Demand Generation</p>
                                     </div>
                                     <div className="flex items-center gap-2 bg-[#ECEFE4] p-5 ">
-                                        <img src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/svgs/check.svg" alt="Check" />
+                                        <img
+                                            src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/svgs/check.svg"
+                                            alt="Check"
+                                        />
                                         <p>Video Marketing Production</p>
                                     </div>
                                     <div className="flex items-center gap-2 bg-[#ECEFE4] p-5 ">
-                                        <img src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/svgs/check.svg" alt="Check" />
+                                        <img
+                                            src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/svgs/check.svg"
+                                            alt="Check"
+                                        />
                                         <p>Content Creation & Amplification</p>
                                     </div>
                                     <div className="mt-5">
                                         {manager && (
                                             <div className="flex items-center gap-5">
-
                                                 <img
                                                     className="w-16 h-16 rounded-full object-cover"
                                                     src={manager.profileImage}
@@ -236,7 +408,6 @@ const Index = () => {
                                                     src={manager.signatureImage}
                                                     alt="Signature"
                                                 />
-
                                             </div>
                                         )}
                                     </div>
@@ -244,25 +415,34 @@ const Index = () => {
                             </div>
                         </div>
                         <div className="order-3 md:order-none flex flex-col items-center mt-10 md:mt-0">
-                            <img className="w-full md:w-130 h-auto md:h-150" src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/design/pride2.jpg" alt="AboutUS2" />
-                            <div className="w-50 h-50 flex flex-col items-center justify-center border border-[#FB5E01] rounded-full mt-5 bg-[#FB5E01] text-white z-10"><span className="text-6xl font-bold">18+</span><span className="text-xl">Years Experience</span></div>
+                            <img
+                                className="w-full md:w-130 h-auto md:h-150"
+                                src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/design/pride2.jpg"
+                                alt="AboutUS2"
+                            />
+                            <div className="w-50 h-50 flex flex-col items-center justify-center border border-[#FB5E01] rounded-full mt-5 bg-[#FB5E01] text-white z-10">
+                                <span className="text-6xl font-bold">18+</span>
+                                <span className="text-xl">Years Experience</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
             {/* Projects Section */}
-            <section className='relative z-10 overflow-x-clip bg-[#152C39]'>
+            <section className="relative z-10 overflow-x-clip bg-[#152C39]">
                 <div className="px-8 py-5 md:px-50 md:py-32">
                     <div className="text-center">
-                        <p className="text-[#F84E25] md:text-xl text-lg font-semibold">RECENT PROJECTS</p>
-                        <p className="text-white font-bold md:text-5xl text-2xl">Our High-Impact Content Marketing Projects</p>
+                        <p className="text-[#F84E25] md:text-xl text-lg font-semibold">
+                            RECENT PROJECTS
+                        </p>
+                        <p className="text-white font-bold md:text-5xl text-2xl">
+                            Our High-Impact Content Marketing Projects
+                        </p>
                     </div>
                     <div className="">
                         <div className="py-20">
-
                             <div className="w-full md:w-[90%] md:ml-[10%]">
-
                                 <Swiper
                                     effect={"coverflow"}
                                     grabCursor={true}
@@ -285,7 +465,6 @@ const Index = () => {
                                     loop={true}
                                     pagination={{ clickable: true }}
                                     modules={[EffectCoverflow, Pagination]}
-
                                     coverflowEffect={{
                                         rotate: 0,
                                         stretch: 0,
@@ -296,9 +475,7 @@ const Index = () => {
                                 >
                                     {slide.map((slide) => (
                                         <SwiperSlide key={slide._id}>
-
                                             <div className="relative">
-
                                                 <img
                                                     src={slide.image}
                                                     className="w-full h-100 md:h-105 object-cover rounded-md"
@@ -306,7 +483,6 @@ const Index = () => {
 
                                                 {/* white info card */}
                                                 <div className="absolute bottom-8 left-8 right-8 bg-white p-6 flex justify-between items-center rounded">
-
                                                     <div>
                                                         <p className="text-orange-500 text-sm font-semibold">
                                                             {slide.tag}
@@ -320,17 +496,12 @@ const Index = () => {
                                                     <div className="bg-orange-500 w-10 h-10 flex items-center justify-center text-white rounded-full">
                                                         →
                                                     </div>
-
                                                 </div>
-
                                             </div>
-
                                         </SwiperSlide>
                                     ))}
                                 </Swiper>
-
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -341,12 +512,16 @@ const Index = () => {
                 <div className="px-8 py-5 lg:px-50 lg:py-32">
                     <div className="">
                         <div>
-                            <p className="text-[#F84E25] text-xl font-semibold">WHY CHOOSE US</p>
+                            <p className="text-[#F84E25] text-xl font-semibold">
+                                WHY CHOOSE US
+                            </p>
                         </div>
                         <div className="flex justify-between">
-                            <p className="mt-5 font-bold text-5xl">Helping Operto 4X Its Revenue In <br /> 12 Months</p>
+                            <p className="mt-5 font-bold text-5xl">
+                                Helping Operto 4X Its Revenue In <br /> 12 Months
+                            </p>
                             <div>
-                                <button className='text-white text-sm md:text-lg font-semibold px-4 py-2 md:px-6 md:py-3 bg-[#FB5E01] hover:bg-black transition-all duration-600 cursor-pointer'>
+                                <button className="text-white text-sm md:text-lg font-semibold px-4 py-2 md:px-6 md:py-3 bg-[#FB5E01] hover:bg-black transition-all duration-600 cursor-pointer">
                                     View ALL Services
                                 </button>
                             </div>
@@ -358,13 +533,16 @@ const Index = () => {
                             {projects.map((project, index) => (
                                 <>
                                     <div key={project._id || index} className="flex">
-                                        <div onMouseEnter={() => setActive(index)} className="cursor-pointer border-b pb-6 group">
-                                            <h2 className={`text-2xl font-bold ${active === index ? "text-black" : "text-gray-500"}`}>
+                                        <div
+                                            onMouseEnter={() => setActive(index)}
+                                            className="cursor-pointer border-b pb-6 group"
+                                        >
+                                            <h2
+                                                className={`text-2xl font-bold ${active === index ? "text-black" : "text-gray-500"}`}
+                                            >
                                                 {project.title}
                                             </h2>
-                                            <p className="text-gray-500 mt-2">
-                                                {project.desc}
-                                            </p>
+                                            <p className="text-gray-500 mt-2">{project.desc}</p>
                                         </div>
                                         <div>
                                             <button className="w-14 h-14 flex items-center justify-center shadow-xl rounded-full bg-white text-2xl text-black hover:text-white hover:bg-[#FB5E01] transition">
@@ -378,16 +556,77 @@ const Index = () => {
 
                         {/* Right Side */}
                         <div className="w-1/2 flex justify-center items-center relative">
-                            <img src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/shapes/choose-shape1.png" className="absolute w-100" />
+                            <img
+                                src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/shapes/choose-shape1.png"
+                                className="absolute w-100"
+                            />
                             {projects.length > 0 && (
-                                <img src={projects[active]?.image} className="relative w-125 left-18 top-5 rounded-xl rotate-4 transition-all duration-500" />
+                                <img
+                                    src={projects[active]?.image}
+                                    className="relative w-125 left-18 top-5 rounded-xl rotate-4 transition-all duration-500"
+                                />
                             )}
                         </div>
                     </div>
                 </div>
             </section>
-        </>
-    )
-}
 
-export default Index
+            {/* Team Members Section */}
+            <section className="bg-[#ECEFE4]">
+                <div className="px-8 py-5 lg:px-50 lg:py-32">
+                    <div className="text-center">
+                        <p className="text-[#F84E25] md:text-xl text-lg font-semibold">
+                            TEAM MEMBERS
+                        </p>
+                        <p className="text-black font-bold md:text-5xl text-2xl">
+                            Content Marketing Leaders Work With Us
+                        </p>
+                    </div>
+                    <div className="mt-20 flex justify-between gap-5">
+                        {teamMembers.map((member) => (
+                            <div key={member._id} className="h-full w-80">
+                                <div className="relative overflow-hidden group">
+                                    <img
+                                        src={member.image}
+                                        alt={member.role}
+                                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                                    />
+
+                                    <div className="absolute inset-0 flex items-end justify-center pb-6 opacity-0 group-hover:opacity-100 transition duration-500">
+                                        <div className="flex gap-5">
+                                            <div className="bg-white p-3 rounded-full shadow hover:bg-orange-500 hover:text-white cursor-pointer">
+                                                <FaFacebookF size={14} />
+                                            </div>
+
+                                            <div className="bg-white p-3 rounded-full shadow hover:bg-orange-500 hover:text-white cursor-pointer">
+                                                <FaTwitter size={14} />
+                                            </div>
+
+                                            <div className="bg-white p-3 rounded-full shadow hover:bg-orange-500 hover:text-white cursor-pointer">
+                                                <FaInstagram size={14} />
+                                            </div>
+
+                                            <div className="bg-white p-3 rounded-full shadow hover:bg-orange-500 hover:text-white cursor-pointer">
+                                                <FaLinkedinIn size={14} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h3 className="mt-5 text-xl font-semibold text-gray-900 text-center cursor-pointer hover:text-[#E15604]">
+                                    {member.name}
+                                </h3>
+
+                                <p className="text-gray-600 text-sm text-center">
+                                    {member.role}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+        </>
+    );
+};
+
+export default Index;

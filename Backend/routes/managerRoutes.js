@@ -1,6 +1,6 @@
-const express = require("express");
-const Manager = require("../models/Manager");
-const auth = require("../middleware/auth");
+import express from "express";
+import Manager from "../models/Manager.js";
+import auth from "../middleware/auth.js";
 
 const router = express.Router();
 
@@ -30,7 +30,7 @@ router.put("/", auth, async (req, res) => {
                 name,
                 role,
                 profileImage,
-                signatureImage
+                signatureImage,
             });
 
         } else {
@@ -51,4 +51,4 @@ router.put("/", auth, async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

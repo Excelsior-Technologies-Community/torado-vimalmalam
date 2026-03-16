@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+import { Schema, model } from "mongoose";
 
-const managerSchema = new mongoose.Schema({
+const managerSchema = new Schema({
     name: {
         type: String,
         required: true
@@ -17,4 +17,4 @@ const managerSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model("Manager", managerSchema);
+export default model("Manager", managerSchema);

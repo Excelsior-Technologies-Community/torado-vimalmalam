@@ -1,6 +1,6 @@
-const Slider = require("../models/Slider");
+import Slider, { find } from "../models/Slider";
 
-exports.createSlider = async (req, res) => {
+export async function createSlider(req, res) {
     try {
 
         const slider = new Slider({
@@ -17,14 +17,14 @@ exports.createSlider = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
-};
+}
 
 
-exports.getSliders = async (req, res) => {
+export async function getSliders(req, res) {
 
     try {
 
-        const sliders = await Slider.find();
+        const sliders = await find();
 
         res.json(sliders);
 
@@ -34,4 +34,4 @@ exports.getSliders = async (req, res) => {
 
     }
 
-};
+}

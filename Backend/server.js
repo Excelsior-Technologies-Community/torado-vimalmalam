@@ -1,17 +1,24 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-require("dotenv").config();
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
+import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
 
-const path = require("path");
+import authRoutes from "./routes/authRoutes.js";
+import serviceRoutes from "./routes/serviceRoutes.js";
+import managerRoutes from "./routes/managerRoutes.js";
+import sliderRoutes from "./routes/sliderRoutes.js";
+import projectsRoutes from "./routes/projectsRoutes.js";
+import teamRoutes from "./routes/teamRoutes.js";
 
-const authRoutes = require("./routes/authRoutes");
-const serviceRoutes = require("./routes/serviceRoutes");
-const managerRoutes = require("./routes/managerRoutes");
-const sliderRoutes = require("./routes/sliderRoutes");
-const projectsRoutes = require("./routes/projectsRoutes");
+dotenv.config();
 
 const app = express();
+
+// Fix for __dirname in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Middleware
 app.use(cors());
@@ -26,16 +33,19 @@ app.use("/api/services", serviceRoutes);
 app.use("/api/manager", managerRoutes);
 app.use("/api/sliders", sliderRoutes);
 app.use("/api/projects", projectsRoutes);
+app.use("/api/team", teamRoutes);
 
-// Connect to MongoDB and start server
+// Port
 const PORT = process.env.PORT || 5000;
 
+// MongoDB connection
 mongoose
     .connect(process.env.MONGO_URI)
     .then(() => {
         console.log("MongoDB connected");
+
         app.listen(PORT, () => {
-            console.log(`Full Bakajiki on port ${PORT}`);
+            console.log(`Server running on port ${PORT}`);
         });
     })
     .catch((err) => {
