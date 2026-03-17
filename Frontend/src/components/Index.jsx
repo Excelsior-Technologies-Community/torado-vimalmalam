@@ -9,6 +9,8 @@ import {
     FaInstagram,
     FaLinkedinIn,
 } from "react-icons/fa";
+import { RiDoubleQuotesR, RiStarSFill } from "react-icons/ri";
+import { GoArrowLeft, GoArrowRight } from "react-icons/go";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, EffectCoverflow } from "swiper/modules";
 import "swiper/css";
@@ -29,39 +31,6 @@ const Index = () => {
 
     // For Choose Us Section
     const [active, setActive] = useState(0);
-
-    const teamMembers = [
-        {
-            _id: "1",
-            name: "Knight Heather",
-            role: "CEO & Founder",
-            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/teams/team1.jpg"
-        },
-        {
-            _id: "2",
-            name: "Ronald Agaton",
-            role: "Web Designer",
-            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/teams/team2.jpg"
-        },
-        {
-            _id: "3",
-            name: "Melesha Brawon",
-            role: "Senior Manager",
-            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/teams/team3.jpg"
-        },
-        {
-            _id: "4",
-            name: "Gertrude Barrow",
-            role: "Businessman",
-            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/teams/team4.jpg"
-        },
-        {
-            _id: "5",
-            name: "Kishck Gemma",
-            role: "Product Manager",
-            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/teams/team1.jpg"
-        }
-    ];
 
     // For Services Section
     useEffect(() => {
@@ -98,14 +67,11 @@ const Index = () => {
     }, []);
 
     // For Team
-    const fetchTeam = async () => {
-        const res = await fetch(API);
-        const data = await res.json();
-        setTeam(data);
-    };
-
     useEffect(() => {
-        fetchTeam();
+        fetch(`${API}/team`)
+            .then((res) => res.json())
+            .then((data) => setTeam(data))
+            .catch((err) => console.error("Error fetching manager:", err));
     }, []);
 
     // Duplicate slides so loop works when slidesPerView equals total slides
@@ -512,24 +478,24 @@ const Index = () => {
                 <div className="px-8 py-5 lg:px-50 lg:py-32">
                     <div className="">
                         <div>
-                            <p className="text-[#F84E25] text-xl font-semibold">
+                            <p className="text-[#F84E25] text-lg md:text-xl font-semibold">
                                 WHY CHOOSE US
                             </p>
                         </div>
-                        <div className="flex justify-between">
-                            <p className="mt-5 font-bold text-5xl">
+                        <div className="flex md:flex-row flex-col justify-between">
+                            <p className="mt-5 font-bold text-2xl md:text-5xl">
                                 Helping Operto 4X Its Revenue In <br /> 12 Months
                             </p>
                             <div>
-                                <button className="text-white text-sm md:text-lg font-semibold px-4 py-2 md:px-6 md:py-3 bg-[#FB5E01] hover:bg-black transition-all duration-600 cursor-pointer">
+                                <button className="text-white mt-5 text-sm md:text-lg font-semibold px-4 py-2 md:px-6 md:py-3 bg-[#FB5E01] hover:bg-black transition-all duration-600 cursor-pointer">
                                     View ALL Services
                                 </button>
                             </div>
                         </div>
                     </div>
-                    <div className="flex mt-10">
+                    <div className="flex md:flex-row flex-col mt-10">
                         {/* Left Side */}
-                        <div className="w-1/2 space-y-10">
+                        <div className="md:w-1/2 space-y-10">
                             {projects.map((project, index) => (
                                 <>
                                     <div key={project._id || index} className="flex">
@@ -545,7 +511,7 @@ const Index = () => {
                                             <p className="text-gray-500 mt-2">{project.desc}</p>
                                         </div>
                                         <div>
-                                            <button className="w-14 h-14 flex items-center justify-center shadow-xl rounded-full bg-white text-2xl text-black hover:text-white hover:bg-[#FB5E01] transition">
+                                            <button className="hidden md:flex w-14 h-14 items-center justify-center shadow-xl rounded-full bg-white text-2xl text-black hover:text-white hover:bg-[#FB5E01] transition">
                                                 <GoArrowDownRight />
                                             </button>
                                         </div>
@@ -555,15 +521,15 @@ const Index = () => {
                         </div>
 
                         {/* Right Side */}
-                        <div className="w-1/2 flex justify-center items-center relative">
+                        <div className="md:w-1/2 flex justify-center items-center relative">
                             <img
                                 src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/shapes/choose-shape1.png"
-                                className="absolute w-100"
+                                className="absolute hidden md:flex w-100"
                             />
                             {projects.length > 0 && (
                                 <img
                                     src={projects[active]?.image}
-                                    className="relative w-125 left-18 top-5 rounded-xl rotate-4 transition-all duration-500"
+                                    className="relative w-90 md:w-125 md:left-18 top-5 rounded-xl rotate-4 transition-all duration-500"
                                 />
                             )}
                         </div>
@@ -573,7 +539,7 @@ const Index = () => {
 
             {/* Team Members Section */}
             <section className="bg-[#ECEFE4]">
-                <div className="px-8 py-5 lg:px-50 lg:py-32">
+                <div className="px-8 py-5 md:px-50 md:py-20">
                     <div className="text-center">
                         <p className="text-[#F84E25] md:text-xl text-lg font-semibold">
                             TEAM MEMBERS
@@ -582,8 +548,8 @@ const Index = () => {
                             Content Marketing Leaders Work With Us
                         </p>
                     </div>
-                    <div className="mt-20 flex justify-between gap-5">
-                        {teamMembers.map((member) => (
+                    <div className="mt-20 flex md:flex-row flex-col justify-between gap-5">
+                        {team.map((member) => (
                             <div key={member._id} className="h-full w-80">
                                 <div className="relative overflow-hidden group">
                                     <img
@@ -594,34 +560,136 @@ const Index = () => {
 
                                     <div className="absolute inset-0 flex items-end justify-center pb-6 opacity-0 group-hover:opacity-100 transition duration-500">
                                         <div className="flex gap-5">
-                                            <div className="bg-white p-3 rounded-full shadow hover:bg-orange-500 hover:text-white cursor-pointer">
+                                            <div className="bg-white p-3 rounded-full shadow hover:bg-orange-500 hover:transition-all hover:duration-300 hover:text-white cursor-pointer">
                                                 <FaFacebookF size={14} />
                                             </div>
 
-                                            <div className="bg-white p-3 rounded-full shadow hover:bg-orange-500 hover:text-white cursor-pointer">
+                                            <div className="bg-white p-3 rounded-full shadow hover:bg-orange-500 hover:transition-all hover:duration-300 hover:text-white cursor-pointer">
                                                 <FaTwitter size={14} />
                                             </div>
 
-                                            <div className="bg-white p-3 rounded-full shadow hover:bg-orange-500 hover:text-white cursor-pointer">
+                                            <div className="bg-white p-3 rounded-full shadow hover:bg-orange-500 hover:transition-all hover:duration-300 hover:text-white cursor-pointer">
                                                 <FaInstagram size={14} />
                                             </div>
 
-                                            <div className="bg-white p-3 rounded-full shadow hover:bg-orange-500 hover:text-white cursor-pointer">
+                                            <div className="bg-white p-3 rounded-full shadow hover:bg-orange-500 hover:transition-all hover:duration-300 hover:text-white cursor-pointer">
                                                 <FaLinkedinIn size={14} />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <h3 className="mt-5 text-xl font-semibold text-gray-900 text-center cursor-pointer hover:text-[#E15604]">
+                                <h3 className="mt-5 text-xl font-semibold text-gray-900 text-center cursor-pointer hover:text-[#E15604] hover:transition-all hover:duration-300">
                                     {member.name}
                                 </h3>
 
-                                <p className="text-gray-600 text-sm text-center">
+                                <p className="text-gray-600 textlgm text-center">
                                     {member.role}
                                 </p>
                             </div>
                         ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* OUR TESTIMONIAL */}
+            <section className="bg-[#ECEFE4]">
+                <div className="px-8 py-5 md:px-60 md:py-32">
+                    <div className="text-center">
+                        <p className="text-[#F84E25] md:text-xl text-lg font-semibold">
+                            OUR TESTIMONIAL
+                        </p>
+                        <p className="text-black font-bold md:text-5xl text-2xl">
+                            What Our Customers Say About Us
+                        </p>
+                    </div>
+                    {/* Main content div */}
+                    <div className="mt-15 flex md:flex-row gap-30">
+                        {/* Left side image div */}
+                        <div className="flex relative">
+                            <img src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/shapes/testimonial-shape1.png" className="absolute md:w-50 md:top-58 md:-left-4" alt="" />
+                            <img src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/testimonials/testimonial1.jpg" className="relative md:w-120 md:left-20" alt="" />
+                        </div>
+                        {/* Right side content div */}
+                        <div className="relative w-[60%] py-5">
+                            {/* 🔥 Fixed Buttons */}
+                            <div className="absolute right-5 bottom-5 flex gap-5 z-10">
+                                <button className="prev w-12 h-12 flex items-center justify-center rounded-full bg-white text-2xl hover:bg-[#FB5E01] hover:text-white transition-all duration-300 cursor-pointer">
+                                    <GoArrowLeft />
+                                </button>
+                                <button className="next w-12 h-12 flex items-center justify-center rounded-full bg-white text-2xl hover:bg-[#FB5E01] hover:text-white transition-all duration-300 cursor-pointer">
+                                    <GoArrowRight />
+                                </button>
+                            </div>
+
+                            <Swiper
+                                modules={[Navigation]}
+                                navigation={{
+                                    prevEl: ".prev",
+                                    nextEl: ".next",
+                                }}
+                                loop={true}
+                            >
+                                {/* ✅ Slide 1 */}
+                                <SwiperSlide>
+                                    <div className="py-5">
+                                        <div className="flex justify-between">
+                                            <RiDoubleQuotesR className="text-7xl text-[#FB5E01]" />
+                                            <div className="flex gap-2 p-5">
+                                                {[...Array(5)].map((_, i) => (
+                                                    <RiStarSFill key={i} className="text-2xl text-amber-400" />
+                                                ))}
+                                            </div>
+                                        </div>
+                                        <p className="py-5 text-xl text-gray-700">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam rem est quod maxime sapiente corporis, molestias autem suscipit veniam rerum ullam iure commodi dolores eius voluptates! Inventore quae repudiandae iusto.
+                                        </p>
+                                        <div className="justify-between items-center">
+                                            <div className="flex">
+                                                <img
+                                                    src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/users/testimonial.png"
+                                                    alt=""
+                                                />
+                                                <div className="mx-10">
+                                                    <h3 className="text-xl font-bold">Lonathon Ronan</h3>
+                                                    <p className="text-[17px]">Happy Customer</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </SwiperSlide>
+
+                                {/* Slide 2 */}
+                                <SwiperSlide>
+                                    <div className="py-5">
+                                        <div className="flex justify-between">
+                                            <RiDoubleQuotesR className="text-7xl text-[#FB5E01]" />
+                                            <div className="flex gap-2 p-5">
+                                                {[...Array(5)].map((_, i) => (
+                                                    <RiStarSFill key={i} className="text-2xl text-amber-400" />
+                                                ))}
+                                            </div>
+                                        </div>
+                                        <p className="py-5 text-xl text-gray-700">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque reprehenderit magnam sequi ipsum aliquam a, asperiores repellat nostrum, suscipit dolorem commodi perspiciatis expedita delectus in sit assumenda? Voluptates, delectus perspiciatis.
+                                        </p>
+                                        <div className="justify-between items-center">
+                                            <div className="flex">
+                                                <img
+                                                    src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/users/testimonial.png"
+                                                    alt=""
+                                                />
+                                                <div className="mx-5">
+                                                    <h3 className="text-xl font-bold">Lonathon Ronan</h3>
+                                                    <p className="text-[17px]">Happy Customer</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </SwiperSlide>
+
+                            </Swiper>
+                        </div>
                     </div>
                 </div>
             </section>

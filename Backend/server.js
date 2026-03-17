@@ -42,10 +42,10 @@ const PORT = process.env.PORT || 5000;
 mongoose
     .connect(process.env.MONGO_URI)
     .then(() => {
-        console.log("MongoDB connected");
+        console.log("MongoDB connected Bro.");
 
         app.listen(PORT, () => {
-            console.log(`Server running on port ${PORT}`);
+            console.log(`Full Bakajiki on port ${PORT}`);
         });
     })
     .catch((err) => {
