@@ -11,6 +11,7 @@ import managerRoutes from "./routes/managerRoutes.js";
 import sliderRoutes from "./routes/sliderRoutes.js";
 import projectsRoutes from "./routes/projectsRoutes.js";
 import teamRoutes from "./routes/teamRoutes.js";
+import testimonialRoutes from "./routes/testimonialRoutes.js"
 
 dotenv.config();
 
@@ -34,6 +35,7 @@ app.use("/api/manager", managerRoutes);
 app.use("/api/sliders", sliderRoutes);
 app.use("/api/projects", projectsRoutes);
 app.use("/api/team", teamRoutes);
+app.use("/api/testimonials", testimonialRoutes);
 
 // Port
 const PORT = process.env.PORT || 5000;

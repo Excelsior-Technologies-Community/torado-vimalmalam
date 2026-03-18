@@ -28,6 +28,7 @@ const Index = () => {
     const [slide, setSlide] = useState([]);
     const [projects, setProjects] = useState([]);
     const [team, setTeam] = useState([]);
+    const [testimonials, setTestimonials] = useState([]);
 
     // For Choose Us Section
     const [active, setActive] = useState(0);
@@ -72,6 +73,11 @@ const Index = () => {
             .then((res) => res.json())
             .then((data) => setTeam(data))
             .catch((err) => console.error("Error fetching manager:", err));
+    }, []);
+
+    // For Testimonials
+    useEffect(() => {
+        axios.get(`${API}/testimonials`).then(res => setTestimonials(res.data));
     }, []);
 
     // Duplicate slides so loop works when slidesPerView equals total slides
@@ -630,63 +636,38 @@ const Index = () => {
                                 }}
                                 loop={true}
                             >
-                                {/* ✅ Slide 1 */}
-                                <SwiperSlide>
-                                    <div className="py-5">
-                                        <div className="flex justify-between">
-                                            <RiDoubleQuotesR className="text-7xl text-[#FB5E01]" />
-                                            <div className="flex gap-2 p-5">
-                                                {[...Array(5)].map((_, i) => (
-                                                    <RiStarSFill key={i} className="text-2xl text-amber-400" />
-                                                ))}
-                                            </div>
-                                        </div>
-                                        <p className="py-5 text-xl text-gray-700">
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam rem est quod maxime sapiente corporis, molestias autem suscipit veniam rerum ullam iure commodi dolores eius voluptates! Inventore quae repudiandae iusto.
-                                        </p>
-                                        <div className="justify-between items-center">
-                                            <div className="flex">
-                                                <img
-                                                    src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/users/testimonial.png"
-                                                    alt=""
-                                                />
-                                                <div className="mx-10">
-                                                    <h3 className="text-xl font-bold">Lonathon Ronan</h3>
-                                                    <p className="text-[17px]">Happy Customer</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </SwiperSlide>
+                                {/* Slide 1 */}
+                                {testimonials.map((item) => (
+                                    <SwiperSlide key={item._id}>
+                                        <div className="py-5">
 
-                                {/* Slide 2 */}
-                                <SwiperSlide>
-                                    <div className="py-5">
-                                        <div className="flex justify-between">
-                                            <RiDoubleQuotesR className="text-7xl text-[#FB5E01]" />
-                                            <div className="flex gap-2 p-5">
-                                                {[...Array(5)].map((_, i) => (
-                                                    <RiStarSFill key={i} className="text-2xl text-amber-400" />
-                                                ))}
-                                            </div>
-                                        </div>
-                                        <p className="py-5 text-xl text-gray-700">
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque reprehenderit magnam sequi ipsum aliquam a, asperiores repellat nostrum, suscipit dolorem commodi perspiciatis expedita delectus in sit assumenda? Voluptates, delectus perspiciatis.
-                                        </p>
-                                        <div className="justify-between items-center">
-                                            <div className="flex">
-                                                <img
-                                                    src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/users/testimonial.png"
-                                                    alt=""
-                                                />
-                                                <div className="mx-5">
-                                                    <h3 className="text-xl font-bold">Lonathon Ronan</h3>
-                                                    <p className="text-[17px]">Happy Customer</p>
+                                            <div className="flex justify-between">
+                                                <RiDoubleQuotesR className="text-7xl text-[#FB5E01]" />
+
+                                                <div className="flex gap-2 p-5">
+                                                    {[...Array(item.rating)].map((_, i) => (
+                                                        <RiStarSFill key={i} className="text-2xl text-amber-400" />
+                                                    ))}
                                                 </div>
                                             </div>
+
+                                            <p className="py-5 text-xl text-gray-700">
+                                                {item.message}
+                                            </p>
+
+                                            <div className="flex justify-between items-center">
+                                                <div className="flex">
+                                                    <img src={item.image} alt="" />
+                                                    <div className="mx-5">
+                                                        <h3 className="text-xl font-bold">{item.name}</h3>
+                                                        <p>{item.role}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
-                                    </div>
-                                </SwiperSlide>
+                                    </SwiperSlide>
+                                ))}
 
                             </Swiper>
                         </div>
