@@ -83,6 +83,33 @@ const Index = () => {
     // Duplicate slides so loop works when slidesPerView equals total slides
     const slides = services.length > 0 ? [...services, ...services] : [];
 
+    const processData = [
+        {
+            _id: 1,
+            heading: "Link building",
+            desc: "Aliquam ses justo amet una uctor sceris quinm anet tempus enim esent egetis hendrer ve nibh vitae",
+            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/abouts/process1.jpg"
+        },
+        {
+            _id: 2,
+            heading: "Content Writers",
+            desc: "Aliquam ses justo amet una uctor sceris quinm anet tempus enim esent egetis hendrer ve nibh vitae",
+            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/abouts/process2.jpg"
+        },
+        {
+            _id: 3,
+            heading: "SEO Analysts",
+            desc: "Aliquam ses justo amet una uctor sceris quinm anet tempus enim esent egetis hendrer ve nibh vitae",
+            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/abouts/process3.jpg"
+        },
+        {
+            _id: 4,
+            heading: "Video Production",
+            desc: "Aliquam ses justo amet una uctor sceris quinm anet tempus enim esent egetis hendrer ve nibh vitae",
+            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/abouts/process4.jpg"
+        }
+    ];
+
     return (
         <>
             {/* Hero Section */}
@@ -610,16 +637,16 @@ const Index = () => {
                         </p>
                     </div>
                     {/* Main content div */}
-                    <div className="mt-15 flex md:flex-row gap-30">
+                    <div className="mt-20 flex flex-col md:flex-row gap-5 md:gap-30">
                         {/* Left side image div */}
-                        <div className="flex relative">
-                            <img src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/shapes/testimonial-shape1.png" className="absolute md:w-50 md:top-58 md:-left-4" alt="" />
-                            <img src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/testimonials/testimonial1.jpg" className="relative md:w-120 md:left-20" alt="" />
+                        <div className="flex md:flex-row flex-col relative">
+                            <img src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/shapes/testimonial-shape1.png" className="absolute hidden md:flex md:w-50 md:top-58 md:-left-4" alt="" />
+                            <img src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/testimonials/testimonial1.jpg" className="relative w-full max-w-sm md:max-w-lg" alt="" />
                         </div>
                         {/* Right side content div */}
-                        <div className="relative w-[60%] py-5">
+                        <div className="relative w-full md:w-1/2 py-5">
                             {/* 🔥 Fixed Buttons */}
-                            <div className="absolute right-5 bottom-5 flex gap-5 z-10">
+                            <div className="absolute bottom-0 right-0 flex gap-5 z-10">
                                 <button className="prev w-12 h-12 flex items-center justify-center rounded-full bg-white text-2xl hover:bg-[#FB5E01] hover:text-white transition-all duration-300 cursor-pointer">
                                     <GoArrowLeft />
                                 </button>
@@ -642,7 +669,7 @@ const Index = () => {
                                         <div className="py-5">
 
                                             <div className="flex justify-between">
-                                                <RiDoubleQuotesR className="text-7xl text-[#FB5E01]" />
+                                                <RiDoubleQuotesR className="md:text-7xl text-5xl text-[#FB5E01]" />
 
                                                 <div className="flex gap-2 p-5">
                                                     {[...Array(item.rating)].map((_, i) => (
@@ -651,12 +678,12 @@ const Index = () => {
                                                 </div>
                                             </div>
 
-                                            <p className="py-5 text-xl text-gray-700">
+                                            <p className="py-5 text-base md:text-xl text-gray-700">
                                                 {item.message}
                                             </p>
 
                                             <div className="flex justify-between items-center">
-                                                <div className="flex">
+                                                <div className="flex items-center gap-3">
                                                     <img src={item.image} alt="" />
                                                     <div className="mx-5">
                                                         <h3 className="text-xl font-bold">{item.name}</h3>
@@ -671,6 +698,45 @@ const Index = () => {
 
                             </Swiper>
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* WORKING PROCESS */}
+            <section>
+                <div className="px-8 py-5 lg:px-50 lg:py-32">
+                    <div>
+                        <div>
+                            <p className="text-[#F84E25] text-lg md:text-xl font-semibold">
+                                WORKING PROCESS
+                            </p>
+                        </div>
+                        <div className="flex md:flex-row flex-col justify-between">
+                            <p className="mt-5 font-bold text-2xl md:text-5xl">
+                                Tell Stories That Create <br /> Lifelong Customers
+                            </p>
+                            <div>
+                                <button className="text-white mt-5 text-sm md:text-lg font-semibold px-4 py-2 md:px-6 md:py-3 bg-[#FB5E01] hover:bg-black transition-all duration-600 cursor-pointer">
+                                    Learn More
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="mt-20 flex items-center gap-10">
+                        <div className="flex gap-10 justify-center">
+                            {processData.map((item) => (
+                                <div key={item._id}>
+                                    <div className="w-80 overflow-hidden rounded-l-full rounded-r-full transition-all mb-10 -rotate-10 hover:rotate-0 duration-700 cursor-pointer">
+                                        <img src={item.image} className="w-full h-25 object-cover" />
+                                    </div>
+                                    <div>
+                                        <p className="font-bold text-2xl">{item._id}.{item.heading}</p>
+                                        <p className="mt-3 text-lg text-gray-700">{item.desc}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        
                     </div>
                 </div>
             </section>
