@@ -12,6 +12,7 @@ import {
 import { RiDoubleQuotesR, RiStarSFill } from "react-icons/ri";
 import { GoArrowLeft, GoArrowRight } from "react-icons/go";
 import { SlCalender } from "react-icons/sl";
+import { BiCommentDetail } from "react-icons/bi";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, EffectCoverflow } from "swiper/modules";
 import "swiper/css";
@@ -31,6 +32,7 @@ const Index = () => {
     const [team, setTeam] = useState([]);
     const [testimonials, setTestimonials] = useState([]);
     const [process, setProcess] = useState([]);
+    const [blogs, setBlogs] = useState([]);
 
     // For Choose Us Section
     const [active, setActive] = useState(0);
@@ -90,16 +92,55 @@ const Index = () => {
             .catch((err) => console.error("Error fetching manager:", err));
     }, []);
 
+    // For Blog Post
+    useEffect(() => {
+        fetch(`${API}/blogs`)
+            .then((res) => res.json())
+            .then((data) => setBlogs(data))
+            .catch((err) => console.error("Error fetching manager:", err));
+    }, []);
+
     // Duplicate slides so loop works when slidesPerView equals total slides
     const slides = services.length > 0 ? [...services, ...services] : [];
 
     const blogPost = [
         {
+            _id: 1,
             image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/blogs/blog1.jpg",
             tag: "Marketing",
             date: "Jul 23 , 2025",
-            comment: "No Comments"
-        }
+            comment: "No Comments",
+            title: "How To Write Killer Evergreen Content To Boost Your Traffic",
+            desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque quas delectus voluptatem praesentium sunt nobis, quisquam aliquam reiciendis dolorum temporibus sapiente.",
+        },
+        {
+            _id: 2,
+            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/blogs/blog2.jpg",
+            tag: "Strategy",
+            date: "Jul 07 , 2025",
+            comment: "02 Comment",
+            title: "53 Best SEO Experts Of 2020: A More Diverse Roundup",
+            desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque quas delectus voluptatem praesentium sunt nobis, quisquam aliquam reiciendis dolorum temporibus sapiente.",
+        },
+        {
+            _id: 3,
+            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/blogs/blog1.jpg",
+            tag: "Marketing",
+            date: "Jul 23 , 2025",
+            comment: "No Comments",
+            title: "How To Write Killer Evergreen Content To Boost Your Traffic",
+            desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque quas delectus voluptatem praesentium sunt nobis, quisquam aliquam reiciendis dolorum temporibus sapiente.",
+        },
+        {
+            _id: 4,
+            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/blogs/blog2.jpg",
+            tag: "Strategy",
+            date: "Jul 07 , 2025",
+            comment: "02 Comment",
+            title: "53 Best SEO Experts Of 2020: A More Diverse Roundup",
+            desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque quas delectus voluptatem praesentium sunt nobis, quisquam aliquam reiciendis dolorum temporibus sapiente.",
+        },
+
     ]
 
     return (
@@ -747,27 +788,37 @@ const Index = () => {
                     {/* Main Content */}
                     <div className="w-full py-10">
                         <Swiper
+                        modules={[Pagination]}
                             spaceBetween={20}
                             slidesPerView={1}
                             slidesPerGroup={1}
+                            pagination={{ clickable: true }}
                             breakpoints={{
                                 768: {
                                     slidesPerView: 2,
-                                    slidesPerGroup: 2, // swipe 2 slides together
+                                    slidesPerGroup: 1, // swipe 2 slides together
                                 },
                             }}
                         >
                             {/* Empty slides (you add design inside) */}
-                            {[1, 2, 3, 4, 5, 6].map((item) => (
+                            {blogs.map((item) => (
                                 <SwiperSlide key={item}>
-                                    <div className="h-60 bg-gray-200 rounded-xl flex items-center justify-center">
+                                    <div className="my-10 flex md:flex-col justify-center">
                                         <div>
-                                            <img src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/blogs/blog1.jpg" alt="" />
+                                            <img src={item.image} className="relative" alt="" />
+                                            <p className="absolute top-75 left-8 p-2 bg-white text-[#FB5E01] font-bold">{item.tag}</p>
                                         </div>
-                                        <div>
-                                            <div>
-                                                <p><SlCalender /> </p>
-                                                <p></p>
+                                        <div className="p-8">
+                                            <div className="flex gap-5">
+                                                <p className="flex justify-center items-center gap-2 text-gray-700"><SlCalender className="text-[#FB5E01]" />{item.date}</p>
+                                                <p className="flex justify-center items-center gap-2 text-gray-700"><BiCommentDetail className="text-[#FB5E01]" />{item.comment}</p>
+                                            </div>
+                                            <div className="mt-10 flex flex-col gap-5">
+                                                <h3 className="font-bold text-3xl hover:text-[#FB5E01] transition-all duration-300 cursor-pointer">{item.title}</h3>
+                                                <p className="font-normal text-gray-700">{item.desc}</p>
+                                                <div>
+                                                    <button className="btn text-black font-bold hover:text-[#FB5E01] transition-all duration-300 cursor-pointer">Read More</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
