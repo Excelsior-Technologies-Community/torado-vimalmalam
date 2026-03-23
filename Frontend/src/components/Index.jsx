@@ -11,6 +11,7 @@ import {
 } from "react-icons/fa";
 import { RiDoubleQuotesR, RiStarSFill } from "react-icons/ri";
 import { GoArrowLeft, GoArrowRight } from "react-icons/go";
+import { SlCalender } from "react-icons/sl";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, EffectCoverflow } from "swiper/modules";
 import "swiper/css";
@@ -29,6 +30,7 @@ const Index = () => {
     const [projects, setProjects] = useState([]);
     const [team, setTeam] = useState([]);
     const [testimonials, setTestimonials] = useState([]);
+    const [process, setProcess] = useState([]);
 
     // For Choose Us Section
     const [active, setActive] = useState(0);
@@ -80,35 +82,25 @@ const Index = () => {
         axios.get(`${API}/testimonials`).then(res => setTestimonials(res.data));
     }, []);
 
+    // For Process Section
+    useEffect(() => {
+        fetch(`${API}/process`)
+            .then((res) => res.json())
+            .then((data) => setProcess(data))
+            .catch((err) => console.error("Error fetching manager:", err));
+    }, []);
+
     // Duplicate slides so loop works when slidesPerView equals total slides
     const slides = services.length > 0 ? [...services, ...services] : [];
 
-    const processData = [
+    const blogPost = [
         {
-            _id: 1,
-            heading: "Link building",
-            desc: "Aliquam ses justo amet una uctor sceris quinm anet tempus enim esent egetis hendrer ve nibh vitae",
-            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/abouts/process1.jpg"
-        },
-        {
-            _id: 2,
-            heading: "Content Writers",
-            desc: "Aliquam ses justo amet una uctor sceris quinm anet tempus enim esent egetis hendrer ve nibh vitae",
-            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/abouts/process2.jpg"
-        },
-        {
-            _id: 3,
-            heading: "SEO Analysts",
-            desc: "Aliquam ses justo amet una uctor sceris quinm anet tempus enim esent egetis hendrer ve nibh vitae",
-            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/abouts/process3.jpg"
-        },
-        {
-            _id: 4,
-            heading: "Video Production",
-            desc: "Aliquam ses justo amet una uctor sceris quinm anet tempus enim esent egetis hendrer ve nibh vitae",
-            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/abouts/process4.jpg"
+            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/blogs/blog1.jpg",
+            tag: "Marketing",
+            date: "Jul 23 , 2025",
+            comment: "No Comments"
         }
-    ];
+    ]
 
     return (
         <>
@@ -723,20 +715,65 @@ const Index = () => {
                         </div>
                     </div>
                     <div className="mt-20 flex items-center gap-10">
-                        <div className="flex gap-10 justify-center">
-                            {processData.map((item) => (
+                        <div className="flex md:flex-row flex-col gap-10 justify-center">
+                            {process.map((item) => (
                                 <div key={item._id}>
-                                    <div className="w-80 overflow-hidden rounded-l-full rounded-r-full transition-all mb-10 -rotate-10 hover:rotate-0 duration-700 cursor-pointer">
+                                    <div className="w-80 overflow-hidden rounded-l-full rounded-r-full transition-all mb-10 md:-rotate-10 hover:rotate-0 duration-700 cursor-pointer">
                                         <img src={item.image} className="w-full h-25 object-cover" />
                                     </div>
                                     <div>
-                                        <p className="font-bold text-2xl">{item._id}.{item.heading}</p>
+                                        <p className="font-bold text-2xl">{item.heading}</p>
                                         <p className="mt-3 text-lg text-gray-700">{item.desc}</p>
                                     </div>
                                 </div>
                             ))}
                         </div>
-                        
+                    </div>
+                </div>
+            </section>
+
+            {/* Blog Post */}
+            <section>
+                <div className="px-8 py-5 md:px-60 md:py-20">
+                    <div className="text-center">
+                        <p className="text-[#F84E25] md:text-xl text-lg font-semibold">
+                            BLOG POST
+                        </p>
+                        <p className="text-black font-bold md:text-5xl text-2xl">
+                            Benefits Of Partnering With Us
+                        </p>
+                    </div>
+
+                    {/* Main Content */}
+                    <div className="w-full py-10">
+                        <Swiper
+                            spaceBetween={20}
+                            slidesPerView={1}
+                            slidesPerGroup={1}
+                            breakpoints={{
+                                768: {
+                                    slidesPerView: 2,
+                                    slidesPerGroup: 2, // swipe 2 slides together
+                                },
+                            }}
+                        >
+                            {/* Empty slides (you add design inside) */}
+                            {[1, 2, 3, 4, 5, 6].map((item) => (
+                                <SwiperSlide key={item}>
+                                    <div className="h-60 bg-gray-200 rounded-xl flex items-center justify-center">
+                                        <div>
+                                            <img src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/blogs/blog1.jpg" alt="" />
+                                        </div>
+                                        <div>
+                                            <div>
+                                                <p><SlCalender /> </p>
+                                                <p></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
                     </div>
                 </div>
             </section>

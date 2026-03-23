@@ -6,6 +6,7 @@ import Slides from "./pages/Slides";
 import Projects from "./pages/Projects"
 import AdminTeam from "./pages/AdminTeam";
 import AdminTestimonials from "./pages/AdminTestimonials";
+import AdminProcess from "./pages/AdminProcess"
 
 function App() {
   const isLoggedIn = () => !!localStorage.getItem("token");
@@ -37,6 +38,10 @@ function App() {
         <Route
           path="/testimonials"
           element={isLoggedIn() ? <AdminTestimonials /> : <Navigate to="/testimonials" />}
+        />
+        <Route
+          path="/process"
+          element={isLoggedIn() ? <AdminProcess /> : <Navigate to="/process" />}
         />
         <Route path="*" element={<Navigate to="/services" />} />
       </Routes>
