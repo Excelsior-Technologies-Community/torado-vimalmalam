@@ -11,6 +11,7 @@ import { FaLinkedin } from "react-icons/fa";
 import { FaTelegramPlane } from "react-icons/fa";
 import { IoChevronDownOutline } from "react-icons/io5";
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
 const Header = () => {
     const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
@@ -97,7 +98,7 @@ const Header = () => {
                                         <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>Pricing Plan</li>
                                         <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>FAQs</li>
                                         <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>Testimonials</li>
-                                        <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>My Account</li>
+                                        <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'><Link to="/account">My Account</Link></li>
                                         <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>Privacy & Policy</li>
                                         <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>Terms & Conditions</li>
                                     </ul>

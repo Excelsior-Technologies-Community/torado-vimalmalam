@@ -1,14 +1,27 @@
 import './App.css'
-import Header from './components/Header.jsx'
-import Index from './components/Index.jsx'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Layout from "./Layout";
+import Home from "./components/Index";
+import Account from "./components/Account";
 
 function App() {
-
   return (
-    <>
-      <Header />
-      <Index />
-    </>
+    <BrowserRouter>
+      <Routes>
+
+        <Route path="/" element={<Layout />}>
+
+          {/* Home page */}
+          <Route index element={<Home />} />
+
+          {/* Account page */}
+          <Route path="account" element={<Account />} />
+
+        </Route>
+
+      </Routes>
+    </BrowserRouter>
   )
 }
 

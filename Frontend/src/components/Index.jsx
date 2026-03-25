@@ -103,46 +103,6 @@ const Index = () => {
     // Duplicate slides so loop works when slidesPerView equals total slides
     const slides = services.length > 0 ? [...services, ...services] : [];
 
-    const blogPost = [
-        {
-            _id: 1,
-            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/blogs/blog1.jpg",
-            tag: "Marketing",
-            date: "Jul 23 , 2025",
-            comment: "No Comments",
-            title: "How To Write Killer Evergreen Content To Boost Your Traffic",
-            desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque quas delectus voluptatem praesentium sunt nobis, quisquam aliquam reiciendis dolorum temporibus sapiente.",
-        },
-        {
-            _id: 2,
-            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/blogs/blog2.jpg",
-            tag: "Strategy",
-            date: "Jul 07 , 2025",
-            comment: "02 Comment",
-            title: "53 Best SEO Experts Of 2020: A More Diverse Roundup",
-            desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque quas delectus voluptatem praesentium sunt nobis, quisquam aliquam reiciendis dolorum temporibus sapiente.",
-        },
-        {
-            _id: 3,
-            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/blogs/blog1.jpg",
-            tag: "Marketing",
-            date: "Jul 23 , 2025",
-            comment: "No Comments",
-            title: "How To Write Killer Evergreen Content To Boost Your Traffic",
-            desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque quas delectus voluptatem praesentium sunt nobis, quisquam aliquam reiciendis dolorum temporibus sapiente.",
-        },
-        {
-            _id: 4,
-            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/blogs/blog2.jpg",
-            tag: "Strategy",
-            date: "Jul 07 , 2025",
-            comment: "02 Comment",
-            title: "53 Best SEO Experts Of 2020: A More Diverse Roundup",
-            desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque quas delectus voluptatem praesentium sunt nobis, quisquam aliquam reiciendis dolorum temporibus sapiente.",
-        },
-
-    ]
-
     return (
         <>
             {/* Hero Section */}
@@ -788,7 +748,7 @@ const Index = () => {
                     {/* Main Content */}
                     <div className="w-full py-10">
                         <Swiper
-                        modules={[Pagination]}
+                            modules={[Pagination]}
                             spaceBetween={20}
                             slidesPerView={1}
                             slidesPerGroup={1}
@@ -803,21 +763,37 @@ const Index = () => {
                             {/* Empty slides (you add design inside) */}
                             {blogs.map((item) => (
                                 <SwiperSlide key={item}>
-                                    <div className="my-10 flex md:flex-col justify-center">
-                                        <div>
-                                            <img src={item.image} className="relative" alt="" />
-                                            <p className="absolute top-75 left-8 p-2 bg-white text-[#FB5E01] font-bold">{item.tag}</p>
+                                    <div className="my-10 flex flex-col justify-center shadow-xl">
+                                        <div className="relative">
+                                            <img src={item.image} alt="" />
+                                            <p className="absolute bottom-4 left-4 p-2 bg-white text-[#FB5E01] font-bold">
+                                                {item.tag}
+                                            </p>
                                         </div>
+
                                         <div className="p-8">
-                                            <div className="flex gap-5">
-                                                <p className="flex justify-center items-center gap-2 text-gray-700"><SlCalender className="text-[#FB5E01]" />{item.date}</p>
-                                                <p className="flex justify-center items-center gap-2 text-gray-700"><BiCommentDetail className="text-[#FB5E01]" />{item.comment}</p>
+                                            <div className="flex gap-5 flex-wrap">
+                                                <p className="flex items-center gap-2 text-gray-700">
+                                                    <SlCalender className="text-[#FB5E01]" />
+                                                    {item.date}
+                                                </p>
+                                                <p className="flex items-center gap-2 text-gray-700">
+                                                    <BiCommentDetail className="text-[#FB5E01]" />
+                                                    {item.comment}
+                                                </p>
                                             </div>
-                                            <div className="mt-10 flex flex-col gap-5">
-                                                <h3 className="font-bold text-3xl hover:text-[#FB5E01] transition-all duration-300 cursor-pointer">{item.title}</h3>
-                                                <p className="font-normal text-gray-700">{item.desc}</p>
+
+                                            <div className="mt-6 flex flex-col gap-4">
+                                                <h3 className="font-bold text-xl md:text-3xl hover:text-[#FB5E01] transition-all duration-300 cursor-pointer">
+                                                    {item.title}
+                                                </h3>
+                                                <p className="font-normal text-gray-700">
+                                                    {item.desc}
+                                                </p>
                                                 <div>
-                                                    <button className="btn text-black font-bold hover:text-[#FB5E01] transition-all duration-300 cursor-pointer">Read More</button>
+                                                    <button className="font-bold hover:text-[#FB5E01] transition-all duration-300">
+                                                        Read More
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -828,6 +804,19 @@ const Index = () => {
                     </div>
                 </div>
             </section>
+
+            {/* Let’s create something Amazing! */}
+            <div className="flex md:flex-row flex-col items-center px-6 py-5 md:px-80 md:py-20 justify-between bg-[#152C39] text-white">
+                <div>
+                    <p className="md:text-5xl font-bold">Let’s create something Amazing!</p>
+                </div>
+                <div>
+                    <button className="text-white mt-5 text-sm md:text-lg font-semibold px-4 py-2 md:px-6 md:py-3 bg-[#FB5E01] hover:bg-black transition-all duration-600 cursor-pointer">
+                        Get In Touch
+                    </button>
+                </div>
+            </div>
+            <hr className="text-gray-600"/>
         </>
     );
 };
