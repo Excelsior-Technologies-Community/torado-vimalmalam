@@ -14,6 +14,7 @@ import teamRoutes from "./routes/teamRoutes.js";
 import testimonialRoutes from "./routes/testimonialRoutes.js"
 import processRoutes from "./routes/processRoutes.js"
 import blogRoutes from "./routes/blogRoutes.js"
+import userRoutes from "./routes/userRoutes.js"
 
 dotenv.config();
 
@@ -40,6 +41,7 @@ app.use("/api/team", teamRoutes);
 app.use("/api/testimonials", testimonialRoutes);
 app.use("/api/process", processRoutes);
 app.use("/api/blogs", blogRoutes);
+app.use("/api/user", userRoutes);
 
 // Port
 const PORT = process.env.PORT || 5000;
