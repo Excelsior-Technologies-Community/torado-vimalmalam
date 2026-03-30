@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Header from './Header'
 import Footer from './Footer'
 import { Link, useNavigate } from "react-router-dom";
@@ -18,6 +18,14 @@ const Account = () => {
         email: "",
         password: ""
     });
+
+    useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+        navigate("/"); // redirect to index page
+    }
+}, []);
 
     // ================= LOGIN =================
     const handleLogin = async (e) => {

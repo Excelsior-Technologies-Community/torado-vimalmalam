@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
@@ -23,6 +24,7 @@ import "../Index.css";
 const API = "http://localhost:5000/api";
 
 const Index = () => {
+    const navigate = useNavigate();
     const swiperRef = useRef(null);
 
     const [services, setServices] = useState([]);
@@ -36,6 +38,14 @@ const Index = () => {
 
     // For Choose Us Section
     const [active, setActive] = useState(0);
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+            navigate("/account");
+        }
+    }, []);
 
     // For Services Section
     useEffect(() => {
@@ -75,7 +85,7 @@ const Index = () => {
     useEffect(() => {
         fetch(`${API}/team`)
             .then((res) => res.json())
-            .then((data) => setTeam(data))
+            .then((data) => setTeam(data)) 
             .catch((err) => console.error("Error fetching manager:", err));
     }, []);
 
@@ -816,7 +826,7 @@ const Index = () => {
                     </button>
                 </div>
             </div>
-            <hr className="text-gray-600"/>
+            <hr className="text-gray-600" />
         </>
     );
 };
