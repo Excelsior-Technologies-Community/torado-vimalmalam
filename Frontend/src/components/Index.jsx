@@ -297,7 +297,7 @@ const Index = () => {
                         >
                             {services.map((service, index) => (
                                 <SwiperSlide key={index}>
-                                    <div className="min-h-[300px] border border-gray-200 bg-white shadow-lg">
+                                    <div className="min-h-75 border border-gray-200 bg-white shadow-lg">
                                         <div className="pt-10 px-10 pb-10">
                                             <div>
                                                 <img
