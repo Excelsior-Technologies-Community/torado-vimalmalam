@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import Header from './Header'
-import Footer from './Footer'
 import { Link, useNavigate } from "react-router-dom";
 
 const Account = () => {

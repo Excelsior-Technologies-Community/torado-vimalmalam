@@ -5,6 +5,7 @@ import Layout from "./Layout";
 import Home from "./components/Index";
 import Account from "./components/Account";
 import About from './components/About';
+import Services from './components/Services';
 
 function App() {
   return (
@@ -21,6 +22,9 @@ function App() {
 
           {/* About page */}
           <Route path="about" element={<About />} />
+
+          {/* Services page */}
+          <Route path="services" element={<Services />} />
 
         </Route>
 

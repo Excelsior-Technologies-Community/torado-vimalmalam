@@ -77,7 +77,7 @@ const Header = () => {
                                     Service +
                                     {/* Dropdown Menu Service */}
                                     <ul className='absolute top-full left-0 mt-5 w-50 bg-white shadow-lg rounded-lg py-2 opacity-0 invisible group-hover/home:opacity-100 group-hover/home:visible translate-y-2 group-hover/home:translate-y-0 transition-all duration-300 z-50'>
-                                        <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>Services</li>
+                                        <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'><Link to="/services">Services</Link></li>
                                         <li className='px-5 py-2.5 text-gray-800 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300'>Service Details</li>
                                     </ul>
                                 </li>

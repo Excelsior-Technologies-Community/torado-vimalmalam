@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, React, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
@@ -6,6 +6,12 @@ import "swiper/css";
 import { GoArrowDownRight } from "react-icons/go";
 import { RiDoubleQuotesR, RiStarSFill } from "react-icons/ri";
 import { GoArrowLeft, GoArrowRight } from "react-icons/go";
+import {
+    FaFacebookF,
+    FaTwitter,
+    FaInstagram,
+    FaLinkedinIn,
+} from "react-icons/fa";
 
 const API = "http://localhost:5000/api";
 
@@ -16,6 +22,7 @@ const About = () => {
     const [services, setServices] = useState([]);
     const [projects, setProjects] = useState([]);
     const [testimonials, setTestimonials] = useState([]);
+    const [team, setTeam] = useState([]);
 
     // For Choose Us Section
     const [active, setActive] = useState(0);
@@ -44,6 +51,14 @@ const About = () => {
             .catch((err) => console.error("Error fetching services:", err));
     }, []);
 
+    // For Team
+    useEffect(() => {
+        fetch(`${API}/team`)
+            .then((res) => res.json())
+            .then((data) => setTeam(data))
+            .catch((err) => console.error("Error fetching manager:", err));
+    }, []);
+
     const globalNumbers = [
         { number: "10K", label: "Global Customers" },
         { number: "300", label: "Completed Projects" },
@@ -59,12 +74,21 @@ const About = () => {
         { img: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/partners/partner5.png", alt: "Puadien" },
     ]
 
+    const items = [
+        'Digital PR',
+        'Content Creation',
+        'Content Marketing',
+        'SEO Analysts',
+        'Content Writers',
+        'Link Building',
+    ];
+
     return (
         <>
             <div className='bg-[#ECEFE4]'>
                 <div className='px-8 py-5 md:px-60 md:py-40'>
                     <div>
-                        <h1 className='text-5xl font-extrabold text-center'>About Us</h1>
+                        <h1 className='md:text-5xl text-2xl font-extrabold text-center'>About Us</h1>
                     </div>
                     <div className='mt-8'>
                         <p className='text-center font-medium text-lg'>
@@ -76,9 +100,9 @@ const About = () => {
             </div>
 
             <div className='px-8 py-5 md:px-60 md:py-40'>
-                <div className='flex justify-evenly'>
+                <div className='flex md:flex-row flex-col justify-evenly'>
                     {/* Left Side Images */}
-                    <div className="relative flex gap-4 items-start">
+                    <div className="relative flex md:flex-row flex-col gap-4 items-start">
                         {/* Stat Card - top left overlapping */}
                         <div className="absolute top-3 left-35 z-10 bg-white shadow-md px-6 py-4">
                             <p className="text-5xl font-extrabold text-gray-900">120+ <br /> <span className='text-sm font-medium'>Projects Completed</span></p>
@@ -87,7 +111,7 @@ const About = () => {
                         {/* Left tall image */}
                         <div className="mt-40">
                             <img
-                                className="h-80 object-cover"
+                                className="md:h-80 h-120 object-cover"
                                 src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/abouts/inner-about1.jpg"
                                 alt=""
                             />
@@ -95,7 +119,7 @@ const About = () => {
                         {/* Right image - taller, starts from top */}
                         <div>
                             <img
-                                className="h-120 object-cover"
+                                className="md:h-120 h-180 object-cover"
                                 src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/abouts/inner-about2.jpg"
                                 alt=""
                             />
@@ -107,10 +131,10 @@ const About = () => {
                         <div>
                             <p className='text-sm text-[#FB5E01] font-semibold tracking-widest uppercase'>About Us</p>
                         </div>
-                        <div className='max-w-xl mt-3'>
-                            <p className='text-4xl text-[#000E1E] font-extrabold leading-tight'>We Take Pride In Keeping Our Services In House</p>
+                        <div className='md:max-w-xl mt-3'>
+                            <p className='md:text-4xl text-2xl text-[#000E1E] font-extrabold leading-tight'>We Take Pride In Keeping Our Services In House</p>
                         </div>
-                        <div className='max-w-xl mt-4'>
+                        <div className='md:max-w-xl mt-4'>
                             <p className='text-base text-gray-500'>Lorem ipsum dolor sit amet consetur iscing elit do sed dolor eiusmod tempor inchidunt labore et dolore magna dolore magna</p>
                         </div>
 
@@ -259,15 +283,20 @@ const About = () => {
             </section>
 
             {/* Numbers */}
-            <div className="bg-[#000E1E] flex justify-between px-55 py-25 text-white">
+            <div className="bg-[#000E1E] flex flex-col lg:flex-row justify-between px-10 lg:px-55 py-10 lg:py-25 text-white gap-8 lg:gap-0">
                 {
                     globalNumbers.map((item, index) => (
                         <div key={index} className="flex gap-5 items-center">
                             <div>
-                                <p className="text-8xl font-extrabold text-transparent hover:text-white transition-colors duration-300" style={{ WebkitTextStroke: "2px white" }}>{item.number}</p>
+                                <p
+                                    className="text-7xl lg:text-8xl font-extrabold text-transparent hover:text-white transition-colors duration-300"
+                                    style={{ WebkitTextStroke: "2px white" }}
+                                >
+                                    {item.number}
+                                </p>
                             </div>
                             <div className="w-20">
-                                <p className="text-2xl font-medium">{item.label}</p>
+                                <p className="text-xl lg:text-2xl font-medium">{item.label}</p>
                             </div>
                         </div>
                     ))
@@ -428,6 +457,76 @@ const About = () => {
                     </div>
                 </div>
             </section>
+
+            {/* Team Members Section */}
+            <section className="bg-[#ECEFE4]">
+                <div className="px-8 py-5 md:px-50 md:py-20">
+                    <div className="text-center">
+                        <p className="text-[#F84E25] md:text-xl text-lg font-semibold">
+                            TEAM MEMBERS
+                        </p>
+                        <p className="text-black font-bold md:text-5xl text-2xl">
+                            Content Marketing Leaders Work With Us
+                        </p>
+                    </div>
+                    <div className="mt-20 flex md:flex-row flex-col justify-between gap-5">
+                        {team.map((member) => (
+                            <div key={member._id} className="h-full w-80">
+                                <div className="relative overflow-hidden group">
+                                    <img
+                                        src={member.image}
+                                        alt={member.role}
+                                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                                    />
+
+                                    <div className="absolute inset-0 flex items-end justify-center pb-6 opacity-0 group-hover:opacity-100 transition duration-500">
+                                        <div className="flex gap-5">
+                                            <div className="bg-white p-3 rounded-full shadow hover:bg-orange-500 hover:transition-all hover:duration-300 hover:text-white cursor-pointer">
+                                                <FaFacebookF size={14} />
+                                            </div>
+
+                                            <div className="bg-white p-3 rounded-full shadow hover:bg-orange-500 hover:transition-all hover:duration-300 hover:text-white cursor-pointer">
+                                                <FaTwitter size={14} />
+                                            </div>
+
+                                            <div className="bg-white p-3 rounded-full shadow hover:bg-orange-500 hover:transition-all hover:duration-300 hover:text-white cursor-pointer">
+                                                <FaInstagram size={14} />
+                                            </div>
+
+                                            <div className="bg-white p-3 rounded-full shadow hover:bg-orange-500 hover:transition-all hover:duration-300 hover:text-white cursor-pointer">
+                                                <FaLinkedinIn size={14} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h3 className="mt-5 text-xl font-semibold text-gray-900 text-center cursor-pointer hover:text-[#E15604] hover:transition-all hover:duration-300">
+                                    {member.name}
+                                </h3>
+
+                                <p className="text-gray-600 textlgm text-center">
+                                    {member.role}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            <div className="bg-[#FB5E01] overflow-hidden w-full py-20">
+                <div
+                    className="flex w-max animate-marquee hover:[animation-play-state:paused]"  // 👈 this
+                >
+                    {[...items, ...items].map((item, i) => (
+                        <Fragment key={i}>
+                            <span className="text-white text-3xl font-bold whitespace-nowrap tracking-wide">
+                                {item}
+                            </span>
+                            <span className="text-white text-2xl mx-7 flex items-center"><img src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/shapes/text-slider-shape.png" alt="" /></span>
+                        </Fragment>
+                    ))}
+                </div>
+            </div>
         </>
     )
 }
