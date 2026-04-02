@@ -1,4 +1,4 @@
-import {React, useEffect, useState, useRef} from 'react'
+import { React, useEffect, useState, useRef } from 'react'
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
@@ -11,6 +11,7 @@ const Services = () => {
     const swiperRef = useRef(null);
 
     const [services, setServices] = useState([]);
+    const [allServices, setAllServices] = useState([]);
 
     const moreServices = [
         {
@@ -61,6 +62,14 @@ const Services = () => {
             .then((res) => res.json())
             .then((data) => setServices(data))
             .catch((err) => console.error("Error fetching services:", err));
+    }, []);
+
+    // For All Services Section
+    useEffect(() => {
+        fetch(`${API}/allservices`)
+            .then((res) => res.json())
+            .then((data) => setAllServices(data))
+            .catch((err) => console.error("Error fetching all services:", err));
     }, []);
 
     return (
@@ -210,16 +219,20 @@ const Services = () => {
                     </div>
 
                     <div className='grid grid-cols-2 gap-8 mt-10'>
-                        <div className='bg-white px-15 flex gap-8 items-center justify-center'>
-                            <div>
-                                <img className='h-70' src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/svgs/service1.svg" alt="" />
-                            </div>
-                            <div>
-                                <p className='text-2xl cursor-pointer hover:text-[#FB5E01] transition-all duration-300 font-bold'>Sales Enablement Content</p>
-                                <p className='text-lg mt-4 text-gray-700'>Procreate is a powerful digital illustration app designed exclusively for ipad It offers a wide range of brushes layering capabilities & advanced features</p>
-                                <button className='btn cursor-pointer text-md font-bold mt-4'>Read More</button>
-                            </div>
-                        </div>
+                        {
+                            allServices.map((item) => (
+                                <div key={item._id} className='bg-white px-15 flex gap-8 items-center justify-center'>
+                                    <div>
+                                        <img className='h-70' src={item.image} alt="" />
+                                    </div>
+                                    <div>
+                                        <p className='text-2xl cursor-pointer hover:text-[#FB5E01] transition-all duration-300 font-bold'>{item.title}</p>
+                                        <p className='text-lg mt-4 text-gray-700'>{item.desc}</p>
+                                        <button className='btn cursor-pointer text-md font-bold mt-4'>Read More</button>
+                                    </div>
+                                </div>
+                            ))
+                        }
                     </div>
                 </div>
             </section>

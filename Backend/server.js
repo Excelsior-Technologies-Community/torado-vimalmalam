@@ -15,6 +15,7 @@ import testimonialRoutes from "./routes/testimonialRoutes.js"
 import processRoutes from "./routes/processRoutes.js"
 import blogRoutes from "./routes/blogRoutes.js"
 import userRoutes from "./routes/userRoutes.js"
+import allserviceRoutes from "./routes/allserviceRoutes.js";
 
 dotenv.config();
 
@@ -42,6 +43,7 @@ app.use("/api/testimonials", testimonialRoutes);
 app.use("/api/process", processRoutes);
 app.use("/api/blogs", blogRoutes);
 app.use("/api/user", userRoutes);
+app.use("/api/allservices", allserviceRoutes);
 
 // Port
 const PORT = process.env.PORT || 5000;
