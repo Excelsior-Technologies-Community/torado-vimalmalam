@@ -13,49 +13,6 @@ const Services = () => {
     const [services, setServices] = useState([]);
     const [allServices, setAllServices] = useState([]);
 
-    const moreServices = [
-        {
-            title: "Sales Enablement Content",
-            description: "Procreate is a powerful digital illustration app designed exclusively for ipad It offers a wide range of brushes layering capabilities & advanced features",
-            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/svgs/service1.svg"
-        },
-        {
-            title: "Newsletters Email Copy",
-            description: "Procreate is a powerful digital illustration app designed exclusively for ipad It offers a wide range of brushes layering capabilities & advanced features",
-            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/svgs/service2.svg"
-        },
-        {
-            title: "Video Production Animation",
-            description: "Procreate is a powerful digital illustration app designed exclusively for ipad It offers a wide range of brushes layering capabilities & advanced features",
-            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/svgs/service3.svg"
-        },
-        {
-            title: "Custom Digital Auditt",
-            description: "Procreate is a powerful digital illustration app designed exclusively for ipad It offers a wide range of brushes layering capabilities & advanced features",
-            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/svgs/service4.svg"
-        },
-        {
-            title: "Distribution Strategy",
-            description: "Procreate is a powerful digital illustration app designed exclusively for ipad It offers a wide range of brushes layering capabilities & advanced features",
-            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/svgs/service5.svg"
-        },
-        {
-            title: "Marketing Data Science",
-            description: "Procreate is a powerful digital illustration app designed exclusively for ipad It offers a wide range of brushes layering capabilities & advanced features",
-            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/svgs/service6.svg"
-        },
-        {
-            title: "Content Creation",
-            description: "Procreate is a powerful digital illustration app designed exclusively for ipad It offers a wide range of brushes layering capabilities & advanced features",
-            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/svgs/service7.svg"
-        },
-        {
-            title: "Brand Strategy",
-            description: "Procreate is a powerful digital illustration app designed exclusively for ipad It offers a wide range of brushes layering capabilities & advanced features",
-            image: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/svgs/service8.svg"
-        },
-    ]
-
     // For Services Section
     useEffect(() => {
         fetch(`${API}/services`)
@@ -218,21 +175,43 @@ const Services = () => {
                         </div>
                     </div>
 
-                    <div className='grid grid-cols-2 gap-8 mt-10'>
-                        {
-                            allServices.map((item) => (
-                                <div key={item._id} className='bg-white px-15 flex gap-8 items-center justify-center'>
-                                    <div>
-                                        <img className='h-70' src={item.image} alt="" />
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
+                        {allServices.map((item) => (
+                            <div
+                                key={item._id}
+                                className="bg-white p-6 md:px-10 md:py-8 rounded-xl shadow-sm hover:shadow-md transition duration-300"
+                            >
+                                <div className="flex flex-col md:flex-row gap-6 md:items-center">
+
+                                    {/* Image */}
+                                    <div className="flex justify-start md:justify-center">
+                                        <img
+                                            src={item.image}
+                                            alt=""
+                                            className="h-12 w-12 md:h-40 md:w-40 object-contain"
+                                        />
                                     </div>
+
+                                    {/* Content */}
                                     <div>
-                                        <p className='text-2xl cursor-pointer hover:text-[#FB5E01] transition-all duration-300 font-bold'>{item.title}</p>
-                                        <p className='text-lg mt-4 text-gray-700'>{item.desc}</p>
-                                        <button className='btn cursor-pointer text-md font-bold mt-4'>Read More</button>
+                                        {/* Title */}
+                                        <p className="text-xl md:text-2xl font-bold text-[#0b1c2c] cursor-pointer hover:text-[#FB5E01] transition">
+                                            {item.title}
+                                        </p>
+
+                                        {/* Description */}
+                                        <p className="text-gray-600 mt-3 text-sm md:text-base leading-relaxed">
+                                            {item.desc}
+                                        </p>
+
+                                        {/* Read More */}
+                                        <button className="mt-4 font-semibold text-[#0b1c2c] hover:text-[#FB5E01] transition">
+                                            Read More
+                                        </button>
                                     </div>
                                 </div>
-                            ))
-                        }
+                            </div>
+                        ))}
                     </div>
                 </div>
             </section>
