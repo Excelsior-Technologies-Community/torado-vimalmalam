@@ -8,6 +8,7 @@ import About from './components/About';
 import Services from './components/Services';
 import Projects from './components/Projects';
 import Team from './components/Team';
+import Pricing from './components/Pricing';
 
 function App() {
   return (
@@ -33,6 +34,9 @@ function App() {
 
           {/* Team page */}
           <Route path="team" element={<Team />} />
+
+          {/* Pricing page */}
+          <Route path="pricing" element={<Pricing />} />
 
         </Route>
 
