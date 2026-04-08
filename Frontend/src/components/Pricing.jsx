@@ -9,6 +9,7 @@ const Pricing = () => {
     const [projects, setProjects] = useState([]);
     // For Choose Us Section
     const [active, setActive] = useState(0);
+    const [plans, setPlans] = useState([]);
 
     // For Choose US Section
     useEffect(() => {
@@ -16,6 +17,14 @@ const Pricing = () => {
             .then((res) => res.json())
             .then((data) => setProjects(data))
             .catch((err) => console.error("Error fetching services:", err));
+    }, []);
+
+    // For Pricing Plans
+    useEffect(() => {
+        fetch(`${API}/pricingplans`)
+            .then((res) => res.json())
+            .then((data) => setPlans(data))
+            .catch((err) => console.error("Error fetching pricing plans:", err));
     }, []);
 
     const pricingPlans = [
@@ -126,7 +135,7 @@ const Pricing = () => {
 
                     {/* Pricing Cards */}
                     <div className="flex gap-6 mt-20">
-                        {pricingPlans.map((plan, i) => (
+                        {plans.map((plan, i) => (
                             <div key={i} className="flex p-10 flex-col flex-1 bg-white shadow-md">
 
                                 <div className="flex items-center gap-4 mb-3">
@@ -134,23 +143,36 @@ const Pricing = () => {
                                     <div>
                                         <h2 className="text-xl font-bold text-gray-900">{plan.name}</h2>
                                         <div className="flex items-baseline gap-1 mt-2 mb-1">
-                                            <span className="text-5xl font-extrabold text-gray-900">${plan.price}</span>
+                                            <span className="text-5xl font-extrabold text-gray-900">
+                                                ${plan.price}
+                                            </span>
                                             <span className="text-sm text-gray-400 ml-1">/ Per Month</span>
                                         </div>
                                     </div>
                                 </div>
 
-                                <p className="text-gray-400 text-sm mt-2 mb-5">Lorem ipsum dolor sit amet so</p>
+                                <p className="text-gray-400 text-sm mt-2 mb-5">
+                                    {plan.description || "Lorem ipsum dolor sit amet so"}
+                                </p>
 
                                 <hr className="border-gray-100 mb-5" />
 
                                 <ul className="flex flex-col gap-3 mb-8 flex-1">
-                                    {pricingFeatures.map((f) => (
-                                        <li key={f.label} className="flex items-center justify-between text-sm text-gray-700">
+                                    {plan.features?.map((f, index) => (
+                                        <li key={index} className="flex items-center justify-between text-sm text-gray-700">
                                             <span>{f.label}</span>
+
                                             {f.available
-                                                ? <svg className="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>
-                                                : <svg className="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" /></svg>
+                                                ? (
+                                                    <svg className="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                )
+                                                : (
+                                                    <svg className="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+                                                    </svg>
+                                                )
                                             }
                                         </li>
                                     ))}
