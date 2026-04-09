@@ -27,20 +27,6 @@ const Pricing = () => {
             .catch((err) => console.error("Error fetching pricing plans:", err));
     }, []);
 
-    const pricingPlans = [
-        { name: "Standard Plan", price: 60, img: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/svgs/package1.svg" },
-        { name: "Professional Plan", price: 70, img: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/svgs/package2.svg" },
-        { name: "Platinum Plan", price: 80, img: "https://torado.envytheme.com/content-marketing-agency/default/assets/images/svgs/package3.svg" },
-    ];
-
-    const pricingFeatures = [
-        { label: "Flexible Terms", available: true },
-        { label: "Biweekly status updates", available: true },
-        { label: "100% natural placement", available: true },
-        { label: "Link Quality Guarantee", available: false },
-        { label: "5 editorial mentions per month", available: false },
-    ];
-
     return (
         <>
             <div className='bg-[#ECEFE4]'>
@@ -134,50 +120,66 @@ const Pricing = () => {
                     </div>
 
                     {/* Pricing Cards */}
-                    <div className="flex gap-6 mt-20">
+                    <div className="flex flex-col md:flex-row gap-6 mt-20">
                         {plans.map((plan, i) => (
-                            <div key={i} className="flex p-10 flex-col flex-1 bg-white shadow-md">
+                            <div
+                                key={i}
+                                className="flex p-6 md:p-10 flex-col w-full md:flex-1 bg-white shadow-md rounded-xl"
+                            >
 
+                                {/* Header */}
                                 <div className="flex items-center gap-4 mb-3">
-                                    <img src={plan.img} alt={plan.name} className="w-14 h-14 rounded-xl" />
+                                    <img
+                                        src={plan.img}
+                                        alt={plan.name}
+                                        className="w-12 h-12 md:w-14 md:h-14 rounded-xl"
+                                    />
                                     <div>
-                                        <h2 className="text-xl font-bold text-gray-900">{plan.name}</h2>
+                                        <h2 className="text-lg md:text-xl font-bold text-gray-900">
+                                            {plan.name}
+                                        </h2>
+
                                         <div className="flex items-baseline gap-1 mt-2 mb-1">
-                                            <span className="text-5xl font-extrabold text-gray-900">
+                                            <span className="text-3xl md:text-5xl font-extrabold text-gray-900">
                                                 ${plan.price}
                                             </span>
-                                            <span className="text-sm text-gray-400 ml-1">/ Per Month</span>
+                                            <span className="text-xs md:text-sm text-gray-400 ml-1">
+                                                / Per Month
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
 
+                                {/* Description */}
                                 <p className="text-gray-400 text-sm mt-2 mb-5">
                                     {plan.description || "Lorem ipsum dolor sit amet so"}
                                 </p>
 
                                 <hr className="border-gray-100 mb-5" />
 
+                                {/* Features */}
                                 <ul className="flex flex-col gap-3 mb-8 flex-1">
                                     {plan.features?.map((f, index) => (
-                                        <li key={index} className="flex items-center justify-between text-sm text-gray-700">
+                                        <li
+                                            key={index}
+                                            className="flex items-center justify-between text-sm text-gray-700"
+                                        >
                                             <span>{f.label}</span>
 
-                                            {f.available
-                                                ? (
-                                                    <svg className="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                                                    </svg>
-                                                )
-                                                : (
-                                                    <svg className="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
-                                                    </svg>
-                                                )
-                                            }
+                                            {f.available ? (
+                                                <svg className="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                                                </svg>
+                                            ) : (
+                                                <svg className="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+                                                </svg>
+                                            )}
                                         </li>
                                     ))}
                                 </ul>
 
+                                {/* Button */}
                                 <button className="py-3 rounded-md font-bold text-sm bg-gray-100 text-gray-800">
                                     Choose Plan
                                 </button>

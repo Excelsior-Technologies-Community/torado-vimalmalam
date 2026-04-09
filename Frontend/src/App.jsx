@@ -9,6 +9,7 @@ import Services from './components/Services';
 import Projects from './components/Projects';
 import Team from './components/Team';
 import Pricing from './components/Pricing';
+import Faq from "./components/Faq";
 
 function App() {
   return (
@@ -37,6 +38,9 @@ function App() {
 
           {/* Pricing page */}
           <Route path="pricing" element={<Pricing />} />
+
+          {/* FAQ page */}
+          <Route path="faq" element={<Faq />} />
 
         </Route>
 
