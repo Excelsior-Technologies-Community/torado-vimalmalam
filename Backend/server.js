@@ -17,6 +17,7 @@ import blogRoutes from "./routes/blogRoutes.js"
 import userRoutes from "./routes/userRoutes.js"
 import allserviceRoutes from "./routes/allserviceRoutes.js";
 import pricingPlanRoutes from "./routes/pricingplanRoutes.js";
+import faqRoutes from "./routes/faqRoutes.js";
 
 dotenv.config();
 
@@ -46,6 +47,7 @@ app.use("/api/blogs", blogRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/allservices", allserviceRoutes);
 app.use("/api/pricingplans", pricingPlanRoutes);
+app.use("/api/faq", faqRoutes);
 
 // Port
 const PORT = process.env.PORT || 5000;

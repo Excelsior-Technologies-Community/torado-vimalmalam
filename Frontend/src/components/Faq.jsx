@@ -1,30 +1,46 @@
-import { React, useState, Fragment } from 'react'
+import { React, useState, Fragment, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { FaPlus, FaMinus, FaPlay } from "react-icons/fa";
+import axios from "axios";
 
 const Faq = () => {
 
+    const [faqData, setFaqData] = useState([]);
     const [activeIndex, setActiveIndex] = useState(0);
     const toggle = (index) => {
         setActiveIndex(index === activeIndex ? null : index);
     };
 
-    const faqData = [
+    // Fetch From Backend
+    const fetchFAQs = async () => {
+        try {
+            const res = await axios.get("http://localhost:5000/api/faqs");
+            setFaqData(res.data);
+        } catch (err) {
+            console.log(err)
+        };
+    };
+
+    useEffect(() => {
+        fetchFAQs();
+    }, []);
+
+    const FAQData = [
         {
             question: "Does this course include a certification?",
-            answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod tincidunt laoreet dolore magna aliquam erat volutpat."
+            answer: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit dionum euismod tincidun laoreet dolore magna aliquam erat volutpat ut wisi enim veniam lorem dolore magna aliqua dolore labor magna"
         },
         {
             question: "When was the course last updated?",
-            answer: "This course was last updated in 2025 with new content."
+            answer: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit dionum euismod tincidun laoreet dolore magna aliquam erat volutpat ut wisi enim veniam lorem dolore magna aliqua dolore labor magna"
         },
         {
             question: "How long do I have access to the course?",
-            answer: "You will have lifetime access to this course."
+            answer: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit dionum euismod tincidun laoreet dolore magna aliquam erat volutpat ut wisi enim veniam lorem dolore magna aliqua dolore labor magna"
         },
         {
             question: "How long will the course take?",
-            answer: "It depends, but typically 4–6 weeks."
+            answer: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit dionum euismod tincidun laoreet dolore magna aliquam erat volutpat ut wisi enim veniam lorem dolore magna aliqua dolore labor magna"
         }
     ];
 
@@ -114,11 +130,11 @@ const Faq = () => {
                                     {/* Answer (Smooth Animation) */}
                                     <div
                                         className={`overflow-hidden transition-all duration-500 ease-in-out ${activeIndex === index
-                                            ? "max-h-40 opacity-100 mt-3"
+                                            ? "max-h-125 opacity-100 mt-3"
                                             : "max-h-0 opacity-0"
                                             }`}
                                     >
-                                        <p className="text-gray-600 text-sm">
+                                        <p className="text-gray-600 text-lg">
                                             {item.answer}
                                         </p>
                                     </div>
