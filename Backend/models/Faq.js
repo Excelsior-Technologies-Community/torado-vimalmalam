@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const faqSchema = new mongoose.Schema({
-    questions: {
+    question: {
         type: String,
         required: true
     },

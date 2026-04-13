@@ -47,7 +47,7 @@ app.use("/api/blogs", blogRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/allservices", allserviceRoutes);
 app.use("/api/pricingplans", pricingPlanRoutes);
-app.use("/api/faq", faqRoutes);
+app.use("/api/faqs", faqRoutes);
 
 // Port
 const PORT = process.env.PORT || 5000;

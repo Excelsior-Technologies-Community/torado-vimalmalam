@@ -13,15 +13,25 @@ export const getFaqs = async (req, res) => {
 // CREATE FAQ
 export const createFaq = async (req, res) => {
     try {
-        const {question, answer} = req.body;
+        console.log("BODY:", req.body); // 👈 ADD THIS
 
-        const faq = new Faq({question, answer});
+        const { question, answer } = req.body;
+
+        if (!question || !answer) {
+            return res.status(400).json({
+                message: "Question and Answer are required"
+            });
+        }
+
+        const faq = new Faq({ question, answer });
         await faq.save();
 
         res.status(201).json(faq);
-    } catch (err) {
-        res.status(500).json(err);
-    };
+
+    } catch (error) {
+        console.error("CREATE FAQ ERROR:", error); // 👈 IMPORTANT
+        res.status(500).json({ message: error.message });
+    }
 };
 
 // UPDATE FAQs

@@ -245,6 +245,25 @@ export default function Services() {
 
                         Pricing Plans
                     </Link>
+                    <Link to="/faq" className="nav-item">
+                        <svg
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        >
+                            {/* FAQ icon (question mark style) */}
+                            <path d="M9 9a3 3 0 1 1 6 0c0 2-3 2-3 4" />
+                            <path d="M12 17h.01" />
+                            <circle cx="12" cy="12" r="10" />
+                        </svg>
+
+                        FAQ
+                    </Link>
                 </nav>
 
                 <div className="sidebar-footer">

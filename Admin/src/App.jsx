@@ -10,6 +10,7 @@ import AdminProcess from "./pages/AdminProcess"
 import AdminBlog from "./pages/AdminBlog";
 import AdminAllServices from "./pages/AdminAllServices";
 import AdminPricingPlans from "./pages/AdminPricingPlans";
+import AdminFaq from "./pages/AdminFaq";
 
 function App() {
   const isLoggedIn = () => !!localStorage.getItem("token");
@@ -57,6 +58,10 @@ function App() {
         <Route
           path="/pricing"
           element={isLoggedIn() ? <AdminPricingPlans /> : <Navigate to="/pricing" />}
+        />
+        <Route
+          path="/faq"
+          element={isLoggedIn() ? <AdminFaq /> : <Navigate to="/faq" />}
         />
         <Route path="*" element={<Navigate to="/services" />} />
       </Routes>
