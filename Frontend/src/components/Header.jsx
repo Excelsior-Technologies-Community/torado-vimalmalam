@@ -178,7 +178,7 @@ const Header = () => {
                             </div>
                             <div className={`overflow-hidden transition-all duration-300 ${openMobileDropdown === 'home' ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}>
                                 <ul className='bg-gray-50 rounded-lg mb-3'>
-                                    <li className='px-5 py-3 text-[#FB5E01] text-[15px] font-medium cursor-pointer'>Home One</li>
+                                    <li className='px-5 py-3 text-[#FB5E01] text-[15px] font-medium cursor-pointer'><Link to="/">Home One</Link></li>
                                     <li className='px-5 py-3 text-gray-700 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300 cursor-pointer'>Home Two</li>
                                 </ul>
                             </div>
@@ -195,7 +195,7 @@ const Header = () => {
                             </div>
                             <div className={`overflow-hidden transition-all duration-300 ${openMobileDropdown === 'services' ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}>
                                 <ul className='bg-gray-50 rounded-lg mb-3'>
-                                    <li className='px-5 py-3 text-gray-700 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300 cursor-pointer'>Services</li>
+                                    <li className='px-5 py-3 text-gray-700 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300 cursor-pointer'><Link to="/services">Services</Link></li>
                                     <li className='px-5 py-3 text-gray-700 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300 cursor-pointer'>Service Details</li>
                                 </ul>
                             </div>
@@ -203,8 +203,18 @@ const Header = () => {
 
                         {/* Projects */}
                         <li className='border-b border-gray-200'>
-                            <div className='py-4 cursor-pointer'>
-                                <span className='text-lg font-semibold text-gray-900 hover:text-[#FB5E01] transition-colors duration-300'>Projects</span>
+                            <div
+                                className='flex items-center justify-between py-4 cursor-pointer'
+                                onClick={() => toggleMobileDropdown('projects')}
+                            >
+                                <span className={`text-lg font-semibold ${openMobileDropdown === 'projects' ? 'text-[#FB5E01]' : 'text-gray-900'}`}>Projects</span>
+                                <IoChevronDownOutline className={`text-lg transition-transform duration-300 ${openMobileDropdown === 'projects' ? 'rotate-180 text-[#FB5E01]' : 'text-gray-500'}`} />
+                            </div>
+                            <div className={`overflow-hidden transition-all duration-300 ${openMobileDropdown === 'projects' ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}>
+                                <ul className='bg-gray-50 rounded-lg mb-3'>
+                                    <li className='px-5 py-3 text-gray-700 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300 cursor-pointer'><Link to="/projects">Projects</Link></li>
+                                    <li className='px-5 py-3 text-gray-700 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300 cursor-pointer'>Projects Details</li>
+                                </ul>
                             </div>
                         </li>
 
@@ -219,12 +229,12 @@ const Header = () => {
                             </div>
                             <div className={`overflow-hidden transition-all duration-300 ${openMobileDropdown === 'pages' ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
                                 <ul className='bg-gray-50 rounded-lg mb-3'>
-                                    <li className='px-5 py-3 text-gray-700 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300 cursor-pointer'>About Us</li>
-                                    <li className='px-5 py-3 text-gray-700 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300 cursor-pointer'>Team</li>
-                                    <li className='px-5 py-3 text-gray-700 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300 cursor-pointer'>Pricing Plan</li>
-                                    <li className='px-5 py-3 text-gray-700 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300 cursor-pointer'>FAQs</li>
+                                    <li className='px-5 py-3 text-gray-700 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300 cursor-pointer'><Link to="/about">About Us</Link></li>
+                                    <li className='px-5 py-3 text-gray-700 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300 cursor-pointer'><Link to="/team">Team</Link></li>
+                                    <li className='px-5 py-3 text-gray-700 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300 cursor-pointer'><Link to="/pricing">Pricing Plan</Link></li>
+                                    <li className='px-5 py-3 text-gray-700 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300 cursor-pointer'><Link to="/faq">FAQs</Link></li>
                                     <li className='px-5 py-3 text-gray-700 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300 cursor-pointer'>Testimonials</li>
-                                    <li className='px-5 py-3 text-gray-700 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300 cursor-pointer'>My Account</li>
+                                    <li className='px-5 py-3 text-gray-700 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300 cursor-pointer'><Link to="/account">My Account</Link></li>
                                     <li className='px-5 py-3 text-gray-700 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300 cursor-pointer'>Privacy & Policy</li>
                                     <li className='px-5 py-3 text-gray-700 text-[15px] font-medium hover:text-[#FB5E01] transition-colors duration-300 cursor-pointer'>Terms & Conditions</li>
                                 </ul>

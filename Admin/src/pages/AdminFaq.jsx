@@ -68,6 +68,12 @@ const AdminFaq = () => {
         }
     };
 
+    // Input Handler
+    const handleChange = (e) => {
+        const {name, value} = e.target;
+        setForm({...form, [name]: value});
+    }
+
     return (
         <div className="max-w-4xl mx-auto mt-10">
             <h2 className="text-2xl font-bold mb-6">
@@ -81,19 +87,17 @@ const AdminFaq = () => {
                     type="text"
                     placeholder="Enter Question"
                     className="w-full border p-3 rounded"
+                    name="question"
                     value={form.question}
-                    onChange={(e) =>
-                        setForm({ ...form, question: e.target.value })
-                    }
+                    onChange={handleChange}
                 />
 
                 <textarea
                     placeholder="Enter Answer"
                     className="w-full border p-3 rounded"
+                    name="answer"
                     value={form.answer}
-                    onChange={(e) =>
-                        setForm({ ...form, answer: e.target.value })
-                    }
+                    onChange={handleChange}
                 />
 
                 <button className="bg-orange-500 text-white px-6 py-2 rounded">

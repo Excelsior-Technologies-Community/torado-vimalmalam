@@ -22,27 +22,10 @@ const Faq = () => {
     };
 
     useEffect(() => {
-        fetchFAQs();
+        (async () => {
+            await fetchFAQs();
+        })();
     }, []);
-
-    const FAQData = [
-        {
-            question: "Does this course include a certification?",
-            answer: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit dionum euismod tincidun laoreet dolore magna aliquam erat volutpat ut wisi enim veniam lorem dolore magna aliqua dolore labor magna"
-        },
-        {
-            question: "When was the course last updated?",
-            answer: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit dionum euismod tincidun laoreet dolore magna aliquam erat volutpat ut wisi enim veniam lorem dolore magna aliqua dolore labor magna"
-        },
-        {
-            question: "How long do I have access to the course?",
-            answer: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit dionum euismod tincidun laoreet dolore magna aliquam erat volutpat ut wisi enim veniam lorem dolore magna aliqua dolore labor magna"
-        },
-        {
-            question: "How long will the course take?",
-            answer: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit dionum euismod tincidun laoreet dolore magna aliquam erat volutpat ut wisi enim veniam lorem dolore magna aliqua dolore labor magna"
-        }
-    ];
 
     const items = [
         'Digital PR',
@@ -73,25 +56,29 @@ const Faq = () => {
                 <div className="grid md:grid-cols-2 gap-10 items-center">
 
                     {/* LEFT SIDE IMAGES */}
-                    <div className="relative flex justify-center items-center">
+                    <div className="relative flex flex-col items-center gap-6 py-10
+                sm:flex sm:justify-center sm:items-center">
 
                         {/* Top Image */}
                         <img
                             src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/questions/question1.jpg"
                             alt=""
-                            className="w-74 object-cover rounded-lg shadow-lg absolute left-30 -bottom-30"
+                            className="w-full max-w-xs object-cover rounded-lg shadow-lg sm:w-74 sm:absolute sm:left-30 sm:-bottom-30"
                         />
 
                         {/* Bottom Image */}
                         <img
                             src="https://torado.envytheme.com/content-marketing-agency/default/assets/images/questions/question2.jpg"
                             alt=""
-                            className="w-74 object-cover rounded-lg shadow-lg absolute right-32 -top-25"
+                            className="w-full max-w-xs object-cover rounded-lg shadow-lg sm:w-74 sm:absolute sm:right-32 sm:-top-25"
                         />
 
                         {/* Play Button */}
-                        <div className="z-10 bg-white w-26 h-26 rounded-full flex items-center justify-center shadow-lg cursor-pointer">
-                            <FaPlay className="text-orange-500 text-2xl ml-1" />
+                        <div className="absolute top-1/2 -translate-y-1/2 z-10 
+                    bg-white w-20 h-20 rounded-full flex items-center justify-center shadow-lg cursor-pointer
+                    
+                    sm:w-26 sm:h-26">
+                            <FaPlay className="text-orange-500 text-xl ml-1 sm:text-2xl" />
                         </div>
                     </div>
 
